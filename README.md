@@ -193,7 +193,7 @@ Legenda: *identificatore*, identificatore esterno↑;
 *È stata ristrutturata anche l'entità "indirizzo" per portarla in 2FN, questa entità non rispetta la 2FN perché ci sono delle dipendenze funzionali parziali.*
 
 ## 5. REALIZZAZIONE DATABASE CON MYSQL
-Script creazione database:
+Script per la creazione del database:
 ```MySQL
 USE mysql;
 DROP USER IF EXISTS "ricetteuser"@"localhost";
@@ -207,55 +207,55 @@ USE ricette;
 DROP TABLE IF EXISTS Categoria;
 CREATE TABLE Categoria(
 	idCategoria SMALLINT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(20) NOT NULL,
-    PRIMARY KEY (idCategoria)
-);
+    	nome VARCHAR(20) NOT NULL,
+    	PRIMARY KEY (idCategoria)
+    );
 
 DROP TABLE IF EXISTS Telefono;
 CREATE TABLE Telefono(
 	numTelefono VARCHAR(16) NOT NULL,
-    PRIMARY KEY (numTelefono)
-);
+    	PRIMARY KEY (numTelefono)
+    );
 
 DROP TABLE IF EXISTS Cap;
 CREATE TABLE Cap(
 	idCap SMALLINT NOT NULL AUTO_INCREMENT,
-    cap INT NOT NULL,
-    PRIMARY KEY (idCap)
-);
+    	cap INT NOT NULL,
+    	PRIMARY KEY (idCap)
+    );
 
 DROP TABLE IF EXISTS Civico;
 CREATE TABLE Civico(
 	idCivico SMALLINT NOT NULL AUTO_INCREMENT,
-    numero INT NOT NULL,
-    idCap SMALLINT NOT NULL,
-    PRIMARY KEY (idCivico),
-    FOREIGN KEY (idCap) REFERENCES Cap(idCap)
-);
+    	numero INT NOT NULL,
+    	idCap SMALLINT NOT NULL,
+    	PRIMARY KEY (idCivico),
+    	FOREIGN KEY (idCap) REFERENCES Cap(idCap)
+    );
 
 DROP TABLE IF EXISTS Via;
 CREATE TABLE Via(
 	idVia SMALLINT NOT NULL AUTO_INCREMENT,
-    nomeVia VARCHAR(20) NOT NULL,
-    idCivico SMALLINT NOT NULL,
-    PRIMARY KEY (idVia),
-    FOREIGN KEY (idCivico) REFERENCES Civico(idCivico)
-);
+    	nomeVia VARCHAR(20) NOT NULL,
+    	idCivico SMALLINT NOT NULL,
+    	PRIMARY KEY (idVia),
+    	FOREIGN KEY (idCivico) REFERENCES Civico(idCivico)
+    );
 
 DROP TABLE IF EXISTS Utente;
 CREATE TABLE Utente(
 	email VARCHAR(20) NOT NULL,
-    psw VARCHAR(20) NOT NULL,
-    nome VARCHAR(20) NOT NULL,
-    cognome VARCHAR(20) NOT NULL,
-    numTelefono VARCHAR(16),
-    idVia SMALLINT NOT NULL AUTO_INCREMENT,
-    dataNascita DATE NOT NULL,
-    foto VARCHAR(20),
-    PRIMARY KEY (email),
-    FOREIGN KEY (numTelefono) REFERENCES Telefono(numTelefono),
-    FOREIGN KEY (idVia) REFERENCES Via(idVia)
-);
+    	psw VARCHAR(20) NOT NULL,
+    	nome VARCHAR(20) NOT NULL,
+    	cognome VARCHAR(20) NOT NULL,
+    	numTelefono VARCHAR(16),
+    	idVia SMALLINT NOT NULL AUTO_INCREMENT,
+    	dataNascita DATE NOT NULL,
+    	foto VARCHAR(20),
+    	PRIMARY KEY (email),
+    	FOREIGN KEY (numTelefono) REFERENCES Telefono(numTelefono),
+    	FOREIGN KEY (idVia) REFERENCES Via(idVia)
+    );
 
 ALTER TABLE Telefono
 ADD email VARCHAR(20) NOT NULL;
@@ -265,60 +265,247 @@ ADD FOREIGN KEY (email) REFERENCES Utente(email);
 
 DROP TABLE IF EXISTS Ricetta;
 CREATE TABLE Ricetta(
-        idRicetta SMALLINT NOT NULL AUTO_INCREMENT,
-        nome VARCHAR(20) NOT NULL,
-        foto VARCHAR(20) NOT NULL,
-        procedimento VARCHAR(500) NOT NULL,
-        tempoCottura SMALLINT NOT NULL,
-        tempoPreparazione SMALLINT NOT NULL,
-        kcal SMALLINT NOT NULL,
-        email VARCHAR(20) NOT NULL,
-        idCategoria SMALLINT NOT NULL,
-        PRIMARY KEY (idRicetta),
-        FOREIGN KEY (email) REFERENCES Utente(email),
-        FOREIGN KEY (idCategoria) REFERENCES Categoria(idCategoria)
-        );
+	idRicetta SMALLINT NOT NULL AUTO_INCREMENT,
+    	nome VARCHAR(20) NOT NULL,
+	foto VARCHAR(20) NOT NULL,
+    	procedimento VARCHAR(500) NOT NULL,
+    	tempoCottura SMALLINT NOT NULL,
+    	tempoPreparazione SMALLINT NOT NULL,
+    	kcal SMALLINT NOT NULL,
+    	email VARCHAR(20) NOT NULL,
+    	idCategoria SMALLINT NOT NULL,
+    	PRIMARY KEY (idRicetta),
+    	FOREIGN KEY (email) REFERENCES Utente(email),
+    	FOREIGN KEY (idCategoria) REFERENCES Categoria(idCategoria)
+    );
     
 DROP TABLE IF EXISTS Preferito;
 CREATE TABLE Preferito(
-		idRicetta SMALLINT NOT NULL AUTO_INCREMENT,
+	idRicetta SMALLINT NOT NULL AUTO_INCREMENT,
         email VARCHAR(20) NOT NULL,
         PRIMARY KEY (idRicetta, email),
         FOREIGN KEY (idRicetta) REFERENCES Ricetta(idRicetta),
         FOREIGN KEY (email) REFERENCES Utente(email)
-        );
+    );
     
 DROP TABLE IF EXISTS TipologiaRecensione;
 CREATE TABLE TipologiaRecensione(
-		idTipologiaRecensione SMALLINT NOT NULL AUTO_INCREMENT,
+	idTipologiaRecensione SMALLINT NOT NULL AUTO_INCREMENT,
         tipoRecensione VARCHAR(20) NOT NULL,
         PRIMARY KEY (idTipologiaRecensione)
-        );
+    );
     
 DROP TABLE IF EXISTS Recensione;
 CREATE TABLE Recensione(
-		idRecensione SMALLINT NOT NULL AUTO_INCREMENT,
+	idRecensione SMALLINT NOT NULL AUTO_INCREMENT,
         testo VARCHAR(200) NOT NULL,
         idTipologiaRecensione SMALLINT NOT NULL,
         PRIMARY KEY (idRecensione),
         FOREIGN KEY (idTipologiaRecensione) REFERENCES TipologiaRecensione(idTipologiaRecensione)
-        );
+    );
     
 DROP TABLE IF EXISTS Scrive;
 CREATE TABLE Scrive(
-		email VARCHAR(20) NOT NULL,
+	email VARCHAR(20) NOT NULL,
         idRecensione SMALLINT NOT NULL,
         idRicetta SMALLINT NOT NULL,
         PRIMARY KEY (idRecensione, idRicetta),
         FOREIGN KEY (email) REFERENCES Utente(email),
         FOREIGN KEY (idRecensione) REFERENCES Recensione(idRecensione),
         FOREIGN KEY (idRicetta) REFERENCES Ricetta(idRicetta)
-        );
+    );
 ```
-![alt text](https://i.imgur.com/UKtl0cB.png)
-![alt text](https://i.imgur.com/G5rIDvu.png)
+Script per popolare il database:
+```MySQL
+SET SQL_SAFE_UPDATES = 0;
+
+DELETE FROM Categoria;
+INSERT INTO Categoria VALUES
+(1, "Pranzo"),
+(2, "Antipasto"),
+(3, "Cena"),
+(4, "Dolci");
+
+DELETE FROM Cap;
+INSERT INTO Cap VALUES
+(1, 84036),
+(2, 40200),
+(3, 17506);
+
+DELETE FROM Civico;
+INSERT INTO Civico VALUES
+(1, 20, 1),
+(2, 37, 2),
+(3, 19, 3);
+
+DELETE FROM Via;
+INSERT INTO Via VALUES
+(1, "via Roma", 1),
+(2, "via Matteotti", 2),
+(3, "via Cavour", 3);
+
+DELETE FROM Utente;
+INSERT INTO Utente VALUES
+("m.rossi@gmail.com", "pass1234", "Mario", "Rossi", NULL, 3, "1962-12-12", "base64,iVBORw"),
+("p.verdi@gmail.com", "pass1234", "Paolo", "Verdi", NULL, 2, "1992-02-17", "base64,pRYFw"),
+("s.bianchi@gmail.com", "pass1234", "Simona", "Bianchi", NULL, 1, "1956-11-09", "base64,mTerP");
+
+DELETE FROM Telefono;
+INSERT INTO Telefono VALUES
+("3661959894", "m.rossi@gmail.com"),
+("3200120242","p.verdi@gmail.com"),
+("3397209757","s.bianchi@gmail.com");
+
+UPDATE Utente
+SET numTelefono = "3661959894"
+WHERE email = "m.rossi@gmail.com";
+
+UPDATE Utente
+SET numTelefono = "3200120242"
+WHERE email = "p.verdi@gmail.com";
+
+UPDATE Utente
+SET numTelefono = "3397209757"
+WHERE email = "s.bianchi@gmail.com";
+
+DELETE FROM Ricetta;
+INSERT INTO Ricetta VALUES
+(1, "Polpettone", "base64,iVBORw", "testotesttesto", 30, 30, 1500, "s.bianchi@gmail.com", 3),
+(2, "Tenerina", "base64,mTerP", "provaprovaprova", 60, 20, 800, "m.rossi@gmail.com", 4),
+(3, "Pasta al sugo", "base64,pRYFw", "testoprovatesto", 10, 10, 800, "m.rossi@gmail.com", 1);
+
+DELETE FROM Preferito;
+INSERT INTO Preferito VALUES
+(2, "m.rossi@gmail.com"),
+(1, "p.verdi@gmail.com"),
+(2, "s.bianchi@gmail.com");
+
+DELETE FROM TipologiaRecensione;
+INSERT INTO TipologiaRecensione VALUES
+(1, "NO VOTO"),
+(2, "1 STELLA"),
+(3, "2 STELLE"),
+(4, "3 STELLE"),
+(5, "4 STELLE"),
+(6, "5 STELLE");
+
+DELETE FROM Recensione;
+INSERT INTO Recensione VALUES
+(1, "Molto buono!", 5),
+(2, "Mi piace pero...", 4),
+(3, "Che schifo!!!!", 2);
+
+DELETE FROM Scrive;
+INSERT INTO Scrive VALUES
+("s.bianchi@gmail.com", 1, 3),
+("m.rossi@gmail.com", 3, 1),
+("p.verdi@gmail.com", 2, 2);
+
+```
 ## 6. IMPLEMENTAZIONE QUERY SQL
-![alt text](https://i.imgur.com/R63AJ1a.png)
+```MySQL
+# OPERAZIONE 1
+INSERT INTO Utente (
+	email, 
+	psw, 
+    nome, 
+    cognome, 
+    numTelefono, 
+    idVia, 
+    dataNascita, 
+    foto
+) VALUES (
+	value_email, 
+    value_psw, 
+    value_cognome, 
+    value_numTelefono, 
+    value_idVia, 
+    value_dataNascita, 
+    value_foto
+);
+
+# OPERAZIONE 2
+INSERT INTO Ricetta (
+	idRicetta,
+    nome,
+    foto,
+    procedimento,
+    tempoCottura,
+    tempoPreparazione,
+    kcal,
+    email,
+    idCategoria
+) VALUES (
+	value_idRicetta,
+    value_nome,
+    value_foto,
+    value_procedimento,
+    value_tempoCottura,
+    value_tempoPreparazione,
+    value_kcal,
+    value_email,
+    value_idCategoria
+);
+
+# OPERAZIONE 3
+INSERT INTO Recensione (
+	idRecensione,
+    testo,
+    idTipologiaRecensione
+) VALUES (
+	value_idRecensione,
+    value_testo,
+    value_idTipologiaRecensione
+);
+
+INSERT INTO Scrive (
+	email,
+    idRecensione,
+    idRicetta
+) VALUES (
+	value_email,
+    value_idRecensione,
+    value_idRicetta
+);
+
+#OPERAZIONE 4
+SELECT * 
+FROM Ricetta
+WHERE Ricetta.email = value_email;
+
+#OPERAZIONE 5
+SELECT * 
+FROM Ricetta
+WHERE Ricetta.idCategoria = value_idCategoria;
+
+#OPERAZIONE 6
+SELECT *
+FROM Ricetta
+INNER JOIN Preferito ON Ricetta.idRicetta = Preferito.idRicetta
+GROUP BY Preferito.idRicetta
+HAVING COUNT(DISTINCT idRicetta) > 0;
+
+#OPERAZIONE 7
+DELETE FROM Ricetta
+WHERE idRicetta = value_idRicetta;
+
+#OPERAZIONE 8
+SELECT *
+FROM Ricetta
+WHERE Preferito.email = ? AND Ricetta.email = ?
+ORDER BY SUM(Ricetta.tempoPreparazione * Ricetta.tempoCottura) ASC;
+
+#OPERAZIONE 9
+SELECT COUNT(DISTINCT idRicetta) 
+FROM Ricetta
+WHERE email LIKE value_email;
+
+#OPERAZIONE 10
+SELECT email
+FROM Utente
+WHERE Utente.telefono IN ("+39%","+33%","+49%")
+ORDER BY email ASC;
+```
 ## 7. TEST DELL'APPLICAZIONE JAVA
 
 Il codice JAVA per esteso è reperibile nella repository corrente.
