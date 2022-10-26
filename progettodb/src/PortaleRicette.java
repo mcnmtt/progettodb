@@ -4,8 +4,6 @@ public class PortaleRicette {
 
     public static void main (String[] args) {
 
-        var service = new OperationsDB();
-
         System.out.println("Benvenuto nel portale di ricette, scegli l'operazione che vuoi svolgere:" +
                 "\n1. Aggiungi nuovo utente." +
                 "\n2. Aggiungi nuova ricetta." +
@@ -22,6 +20,8 @@ public class PortaleRicette {
                 "\n\n Seleziona la tua scelta e dai invio.");
 
         Scanner sc = new Scanner(System.in);
+        var service = new OperationsDB();
+
         switch(sc.nextInt()) {
             case 1:
                 Utente utente = new Utente();
@@ -45,7 +45,7 @@ public class PortaleRicette {
 
                 service.operazioneUno(utente);
 
-                System.out.println("Operazione eseguita con successo. Query eseguita: \n" +
+                System.out.println("Query eseguita: \n" +
                         "INSERT INTO Utente (\n" +
                         "\temail, \n" +
                         "\tpsw, \n" +
@@ -64,6 +64,7 @@ public class PortaleRicette {
                         "    value_dataNascita, \n" +
                         "    value_foto\n" +
                         ");");
+                System.out.println("Operazione eseguita con successo.\n");
                 break;
             case 2:
                 System.out.println("Prova 2");
