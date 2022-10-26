@@ -9,7 +9,7 @@ public class OperationsDB {
 
         ArrayList<Categoria> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Categoria;");
             resultSet = ps.executeQuery();
@@ -35,7 +35,7 @@ public class OperationsDB {
 
         ArrayList<Telefono> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Telefono;");
             resultSet = ps.executeQuery();
@@ -61,7 +61,7 @@ public class OperationsDB {
 
         ArrayList<Cap> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Cap;");
             resultSet = ps.executeQuery();
@@ -87,7 +87,7 @@ public class OperationsDB {
 
         ArrayList<Civico> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Civico;");
             resultSet = ps.executeQuery();
@@ -114,7 +114,7 @@ public class OperationsDB {
 
         ArrayList<Via> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Via;");
             resultSet = ps.executeQuery();
@@ -141,7 +141,7 @@ public class OperationsDB {
 
         ArrayList<Utente> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente;");
             resultSet = ps.executeQuery();
@@ -173,7 +173,7 @@ public class OperationsDB {
 
         ArrayList<Ricetta> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Ricetta;");
             resultSet = ps.executeQuery();
@@ -206,7 +206,7 @@ public class OperationsDB {
 
         ArrayList<Preferito> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Preferito;");
             resultSet = ps.executeQuery();
@@ -232,7 +232,7 @@ public class OperationsDB {
 
         ArrayList<TipologiaRecensione> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM TipologiaRecensione;");
             resultSet = ps.executeQuery();
@@ -258,7 +258,7 @@ public class OperationsDB {
 
         ArrayList<Recensione> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Recensione;");
             resultSet = ps.executeQuery();
@@ -285,7 +285,7 @@ public class OperationsDB {
 
         ArrayList<Scrive> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Scrive;");
             resultSet = ps.executeQuery();
@@ -309,7 +309,7 @@ public class OperationsDB {
     //OPERAZIONE #1
     public void operazioneUno(Utente utente) {
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO Utente (" +
                             "email, " +
@@ -342,7 +342,7 @@ public class OperationsDB {
     //OPERAZIONE #2
     public void operazioneDue(Ricetta ricetta) {
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO Ricetta (" +
                             "idRicetta, " +
@@ -377,7 +377,7 @@ public class OperationsDB {
     //OPERAZIONE 3
     public void operazioneTre(Recensione recensione, Scrive scrive) {
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO Ricetta (" +
                             "idRecensione, " +
@@ -396,7 +396,7 @@ public class OperationsDB {
             throw new RuntimeException(e);
         }
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO Scrive (" +
                             "email, " +
@@ -423,7 +423,7 @@ public class OperationsDB {
 
         ResultSet resultSet;
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM ricetta WHERE email=?");
 
@@ -460,7 +460,7 @@ public class OperationsDB {
 
         ResultSet resultSet;
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT * FROM ricetta WHERE idCategoria=?");
 
@@ -497,7 +497,7 @@ public class OperationsDB {
 
         ResultSet resultSet;
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT *" +
                     "FROM Ricetta" +
@@ -532,7 +532,7 @@ public class OperationsDB {
     //OPERAZIONE 7
     public void deleteRicetta(int idRicetta) {
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("DELETE FROM ricetta WHERE idRicetta=?");
 
@@ -553,7 +553,7 @@ public class OperationsDB {
 
         ResultSet resultSet;
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT *" +
                     "FROM Ricetta" +
@@ -594,7 +594,7 @@ public class OperationsDB {
 
         ResultSet resultSet;
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("" +
                     "SELECT COUNT(DISTINCT idRicetta)" +
@@ -621,7 +621,7 @@ public class OperationsDB {
 
         ArrayList<String> lista = new ArrayList<>();
 
-        try (Connection con = ConnPool.getConnection()) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT email" +
                     "FROM Utente" +
