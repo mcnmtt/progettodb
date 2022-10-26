@@ -1,8 +1,17 @@
-**PROGETTO BASE DI DATI**
+<p align="center">
+    <img width="200" src="https://www.unisa.it/rescue/img/logo_standard.png" alt="Logo UNISA">
+</p>
+<h2 align="center">
+PROGETTO BASE DI DATI
 
-_Mattia Maucioni_
-
-_matr. 0512108936_
+PORTALE RICETTE
+</h2>
+<p align="center">
+Mattia Maucioni
+</p>
+<p align="center">
+matr. 0512108936
+</p>
 
 ## 1. DESCRIZIONE DELLA REALTÀ D'INTERESSE, RACCOLTA DELLE SPECIFICHE E PRIMA ANALISI
 Si intende progettare una base di dati che gestisca le informazioni relative ad un portale web di ricette.
@@ -186,4 +195,8 @@ Legenda: *identificatore*, identificatore esterno↑;
 ## 5. REALIZZAZIONE DATABASE CON MYSQL
 ![alt text](https://i.imgur.com/UKtl0cB.png)
 ![alt text](https://i.imgur.com/G5rIDvu.png)
+## 6. IMPLEMENTAZIONE QUERY SQL
 ![alt text](https://i.imgur.com/R63AJ1a.png)
+## 7. TEST DELL'APPLICAZIONE JAVA
+
+Il codice JAVA per esteso è reperibile nella repository corrente.
