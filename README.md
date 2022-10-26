@@ -193,6 +193,128 @@ Legenda: *identificatore*, identificatore esterno↑;
 *È stata ristrutturata anche l'entità "indirizzo" per portarla in 2FN, questa entità non rispetta la 2FN perché ci sono delle dipendenze funzionali parziali.*
 
 ## 5. REALIZZAZIONE DATABASE CON MYSQL
+Script creazione database:
+```MySQL
+USE mysql;
+DROP USER IF EXISTS "ricetteuser"@"localhost";
+CREATE USER "ricetteuser"@"localhost" IDENTIFIED BY "ricetteuser";
+DROP DATABASE IF EXISTS ricette;
+CREATE DATABASE ricette;
+GRANT ALL ON ricette.* TO "ricetteuser"@"localhost";
+
+USE ricette;
+
+DROP TABLE IF EXISTS Categoria;
+CREATE TABLE Categoria(
+	idCategoria SMALLINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(20) NOT NULL,
+    PRIMARY KEY (idCategoria)
+);
+
+DROP TABLE IF EXISTS Telefono;
+CREATE TABLE Telefono(
+	numTelefono VARCHAR(16) NOT NULL,
+    PRIMARY KEY (numTelefono)
+);
+
+DROP TABLE IF EXISTS Cap;
+CREATE TABLE Cap(
+	idCap SMALLINT NOT NULL AUTO_INCREMENT,
+    cap INT NOT NULL,
+    PRIMARY KEY (idCap)
+);
+
+DROP TABLE IF EXISTS Civico;
+CREATE TABLE Civico(
+	idCivico SMALLINT NOT NULL AUTO_INCREMENT,
+    numero INT NOT NULL,
+    idCap SMALLINT NOT NULL,
+    PRIMARY KEY (idCivico),
+    FOREIGN KEY (idCap) REFERENCES Cap(idCap)
+);
+
+DROP TABLE IF EXISTS Via;
+CREATE TABLE Via(
+	idVia SMALLINT NOT NULL AUTO_INCREMENT,
+    nomeVia VARCHAR(20) NOT NULL,
+    idCivico SMALLINT NOT NULL,
+    PRIMARY KEY (idVia),
+    FOREIGN KEY (idCivico) REFERENCES Civico(idCivico)
+);
+
+DROP TABLE IF EXISTS Utente;
+CREATE TABLE Utente(
+	email VARCHAR(20) NOT NULL,
+    psw VARCHAR(20) NOT NULL,
+    nome VARCHAR(20) NOT NULL,
+    cognome VARCHAR(20) NOT NULL,
+    numTelefono VARCHAR(16),
+    idVia SMALLINT NOT NULL AUTO_INCREMENT,
+    dataNascita DATE NOT NULL,
+    foto VARCHAR(20),
+    PRIMARY KEY (email),
+    FOREIGN KEY (numTelefono) REFERENCES Telefono(numTelefono),
+    FOREIGN KEY (idVia) REFERENCES Via(idVia)
+);
+
+ALTER TABLE Telefono
+ADD email VARCHAR(20) NOT NULL;
+
+ALTER TABLE Telefono
+ADD FOREIGN KEY (email) REFERENCES Utente(email);
+
+DROP TABLE IF EXISTS Ricetta;
+CREATE TABLE Ricetta(
+        idRicetta SMALLINT NOT NULL AUTO_INCREMENT,
+        nome VARCHAR(20) NOT NULL,
+        foto VARCHAR(20) NOT NULL,
+        procedimento VARCHAR(500) NOT NULL,
+        tempoCottura SMALLINT NOT NULL,
+        tempoPreparazione SMALLINT NOT NULL,
+        kcal SMALLINT NOT NULL,
+        email VARCHAR(20) NOT NULL,
+        idCategoria SMALLINT NOT NULL,
+        PRIMARY KEY (idRicetta),
+        FOREIGN KEY (email) REFERENCES Utente(email),
+        FOREIGN KEY (idCategoria) REFERENCES Categoria(idCategoria)
+        );
+    
+DROP TABLE IF EXISTS Preferito;
+CREATE TABLE Preferito(
+		idRicetta SMALLINT NOT NULL AUTO_INCREMENT,
+        email VARCHAR(20) NOT NULL,
+        PRIMARY KEY (idRicetta, email),
+        FOREIGN KEY (idRicetta) REFERENCES Ricetta(idRicetta),
+        FOREIGN KEY (email) REFERENCES Utente(email)
+        );
+    
+DROP TABLE IF EXISTS TipologiaRecensione;
+CREATE TABLE TipologiaRecensione(
+		idTipologiaRecensione SMALLINT NOT NULL AUTO_INCREMENT,
+        tipoRecensione VARCHAR(20) NOT NULL,
+        PRIMARY KEY (idTipologiaRecensione)
+        );
+    
+DROP TABLE IF EXISTS Recensione;
+CREATE TABLE Recensione(
+		idRecensione SMALLINT NOT NULL AUTO_INCREMENT,
+        testo VARCHAR(200) NOT NULL,
+        idTipologiaRecensione SMALLINT NOT NULL,
+        PRIMARY KEY (idRecensione),
+        FOREIGN KEY (idTipologiaRecensione) REFERENCES TipologiaRecensione(idTipologiaRecensione)
+        );
+    
+DROP TABLE IF EXISTS Scrive;
+CREATE TABLE Scrive(
+		email VARCHAR(20) NOT NULL,
+        idRecensione SMALLINT NOT NULL,
+        idRicetta SMALLINT NOT NULL,
+        PRIMARY KEY (idRecensione, idRicetta),
+        FOREIGN KEY (email) REFERENCES Utente(email),
+        FOREIGN KEY (idRecensione) REFERENCES Recensione(idRecensione),
+        FOREIGN KEY (idRicetta) REFERENCES Ricetta(idRicetta)
+        );
+```
 ![alt text](https://i.imgur.com/UKtl0cB.png)
 ![alt text](https://i.imgur.com/G5rIDvu.png)
 ## 6. IMPLEMENTAZIONE QUERY SQL
