@@ -99,7 +99,7 @@ Legenda: *entità debole*, identificatore esterno↑;
 | **Operazione** | **Tipo** | **Frequenza** |
 | --- | --- | --- |
 |1. Aggiungi un nuovo utente.| I | 2/gg |
-|2. Aggiungi nuova ricetta.| I | 1/gg |
+|2. Aggiungi nuova ricetta.| I | 2/gg |
 |3. Aggiungi recensione ad una ricetta (con o senza voto).| I | 5/gg |
 |4. Selezionare tutte le ricette di un utente.| B | 5/gg |
 |5. Selezionare tutte le ricette di una categoria.| I | 5/gg |
@@ -134,7 +134,7 @@ Si valutino dunque gli accessi con e senza l'attributo ridondante dell'entità "
 | Appartiene                             | R                       | 1       | L    |
 | Ricetta                                | E                       | 2       | S    |
 | Ricetta                                | E                       | 1       | L    |
-| TOTALE                                 | (5L+2S) = 7*1/gg = 7/gg |         |      |
+| TOTALE                                 | (5L+2S) = 7*2/gg = 14/gg |         |      |
 
 | Calcolo con ridondanza - Operazione #2 |                         |         |      |
 |----------------------------------------|-------------------------|---------|------|
@@ -144,7 +144,7 @@ Si valutino dunque gli accessi con e senza l'attributo ridondante dell'entità "
 | Inserito                               | R                       | 1       | L    |
 | Appartiene                             | R                       | 1       | L    |
 | Ricetta                                | E                       | 1       | S    |
-| TOTALE                                 | (4L+1S) = 5*1/gg = 5/gg |         |      |
+| TOTALE                                 | (4L+1S) = 5*2/gg = 10/gg |         |      |
 
 Osserviamo che, banalmente, il totale degli accessi all'operazione con ridondanza è superiore al totale degli accessi all'operazione senza ridondanza.
 
