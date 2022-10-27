@@ -4,6 +4,8 @@
 <h2 align="center">
 PROGETTO BASE DI DATI
 
+prof.ssa Sebillo
+
 PORTALE RICETTE
 </h2>
 <p align="center">
