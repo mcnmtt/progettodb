@@ -148,7 +148,7 @@ Si valutino dunque gli accessi con e senza l'attributo ridondante dell'entità "
 
 Osserviamo che, banalmente, il totale degli accessi all'operazione con ridondanza è superiore al totale degli accessi all'operazione senza ridondanza.
 
-Si ottiene un miglioramento quindi, in termini di memoria, rimuovendo l'attributo ridondante.
+Si ottiene un miglioramento quindi, in termini di acesso alla memoria, rimuovendo l'attributo ridondante.
 
 **ELIMINAZIONE DELLE GERARCHIE**
 
