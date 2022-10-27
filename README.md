@@ -507,7 +507,20 @@ WHERE Utente.telefono IN ("+39%","+33%","+49%")
 ORDER BY email ASC;
 ```
 ## 7. TEST DELL'APPLICAZIONE JAVA
+L’applicazione si presenta con un interfaccia semplice ed intuitiva. È divisa in due parti. Una parte dedicata al Menù dove è possibile visualizzare tutte le operazioni che si possono eseguire, ed una parte interattiva dove viene inserito il numero dell’operazione che si intende eseguire e tutte le altre eventuali operazioni necessarie al fine di completare l’operazione eseguita. 
 
-Il codice JAVA per esteso è reperibile nella repository corrente.
+Esempio d'esecuzione dell'operazione 1 (Aggiungi utente):
 
-![alt text](https://i.imgur.com/v5Lvw4q.png)
+![alt text](https://i.imgur.com/ZhGIGoD.gif)
+
+Tabella utente prima dell'operazione:
+
+![alt text](https://i.imgur.com/RInQEIv.png)
+
+Tabella utente dopo l'operazione:
+
+![alt text](https://i.imgur.com/vNFAca5.png)
+
+La stampa avviene solo per le operazioni di tipo SELECT e può essere visualizzata nell’ambiente di sviluppo. 
+
+Il programma è perfettamente funzionante ed è testabile utilizzando la repository corrente, in cui ovviamente poter reperire il codice Java per esteso.
