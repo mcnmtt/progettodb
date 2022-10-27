@@ -74,4 +74,19 @@ public class Ricetta {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "Ricetta{" +
+                "idRicetta=" + idRicetta +
+                ", tempoCottura=" + tempoCottura +
+                ", tempoPreparazione=" + tempoPreparazione +
+                ", kcal=" + kcal +
+                ", idCategoria=" + idCategoria +
+                ", nome='" + nome + '\'' +
+                ", foto='" + foto + '\'' +
+                ", procedimento='" + procedimento + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

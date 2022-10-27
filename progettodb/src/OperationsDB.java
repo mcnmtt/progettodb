@@ -379,7 +379,7 @@ public class OperationsDB {
 
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Ricetta (" +
+                    "INSERT INTO Recensione (" +
                             "idRecensione, " +
                             "testo, " +
                             "idTipologiaRecensione" +
@@ -491,7 +491,7 @@ public class OperationsDB {
     }
 
     //OPERAZIONE 6
-    public ArrayList<Ricetta> operazioneSei(int idCategoria) {
+    public ArrayList<Ricetta> operazioneSei() {
 
         ArrayList<Ricetta> listaRicette = new ArrayList<>();
 
@@ -500,10 +500,7 @@ public class OperationsDB {
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("SELECT *" +
-                    "FROM Ricetta" +
-                    "INNER JOIN Preferito ON Ricetta.idRicetta = Preferito.idRicetta" +
-                    "GROUP BY Preferito.idRicetta" +
-                    "HAVING COUNT(DISTINCT idRicetta) > 0;");
+                    "FROM Ricetta INNER JOIN Preferito ON Ricetta.idRicetta = Preferito.idRicetta");
 
             resultSet = ps.executeQuery();
 
@@ -519,7 +516,7 @@ public class OperationsDB {
                 ricetta.setTempoPreparazione(resultSet.getInt(6));
                 ricetta.setKcal(resultSet.getInt(7));
                 ricetta.setEmail(resultSet.getString(8));
-                ricetta.setIdCategoria(idCategoria);
+                ricetta.setIdCategoria(resultSet.getInt(9));
 
                 listaRicette.add(ricetta);
             }
@@ -641,6 +638,27 @@ public class OperationsDB {
 
         } catch (SQLException e) {
             throw new RuntimeException();
+        }
+    }
+
+    //PRENDERE ULTIMO INDICE RECENSIONI
+    public int retrieveNumberOfRecensioni() {
+
+        int num = 0;
+
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
+
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM recensione");
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                num = rs.getInt(1);
+
+            }
+            return num;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
