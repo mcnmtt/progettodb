@@ -509,3 +509,5 @@ ORDER BY email ASC;
 ## 7. TEST DELL'APPLICAZIONE JAVA
 
 Il codice JAVA per esteso è reperibile nella repository corrente.
+
+![alt text](https://i.imgur.com/v5Lvw4q.png)
