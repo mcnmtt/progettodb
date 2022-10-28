@@ -131,10 +131,10 @@ Si valutino dunque gli accessi con e senza l'attributo ridondante dell'entità "
 |----------------------------------------|-------------------------|---------|------|
 | Tabella                                | Tipo                    | Accessi | Tipo |
 | Categoria                              | E                       | 1       | L    |
-| Utente                                 | E                       | 1       | l    |
+| Utente                                 | E                       | 1       | L    |
 | Inserito                               | R                       | 1       | L    |
 | Appartiene                             | R                       | 1       | L    |
-| Ricetta                                | E                       | 2       | S    |
+| Ricetta                                | E                       | 1       | S    |
 | Ricetta                                | E                       | 1       | L    |
 | TOTALE                                 | (5L+2S) = 7*2/gg = 14/gg |         |      |
 
@@ -142,11 +142,11 @@ Si valutino dunque gli accessi con e senza l'attributo ridondante dell'entità "
 |----------------------------------------|-------------------------|---------|------|
 | Tabella                                | Tipo                    | Accessi | Tipo |
 | Categoria                              | E                       | 1       | L    |
-| Utente                                 | E                       | 1       | l    |
+| Utente                                 | E                       | 1       | L    |
 | Inserito                               | R                       | 1       | L    |
 | Appartiene                             | R                       | 1       | L    |
 | Ricetta                                | E                       | 1       | S    |
-| TOTALE                                 | (4L+1S) = 5*2/gg = 10/gg |         |      |
+| TOTALE                                 | (4L+2S) = 6*2/gg = 12/gg|         |      |
 
 Osserviamo che, banalmente, il totale degli accessi all'operazione con ridondanza è superiore al totale degli accessi all'operazione senza ridondanza.
 
