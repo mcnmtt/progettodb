@@ -50,14 +50,14 @@ Sarà possibile aggiungere, da parte di un utente, una ricetta alla lista delle 
 
 SCHEMA EER
 
-![alt text](https://i.imgur.com/BUVzYZY.png)
+![alt text](https://i.imgur.com/9uq6vqB.png)
 
 **DIZIONARIO DELLE ENTITÀ**
 
 | **Entità** | **Descrizione** | **Attributi** | **Identificatore** |
 | --- | --- | --- | --- |
-| Utente | Utente coinvolto nella realtà d'interesse. | email, password, nome, cognome, telefono, indirizzo, data di nascita, foto. | email |
-| Ricetta | L'elemento al centro della realtà d'interesse che collega le entità tra di loro. | idRicetta, nome, procedimento, foto, tempo di preparazione, tempo di cottura, tempo, kcal. | idRicetta |
+| Utente | Utente coinvolto nella realtà d'interesse. | email, password, nome, cognome, telefono, indirizzo, data di nascita, foto, numRicettePubblicate. | email |
+| Ricetta | L'elemento al centro della realtà d'interesse che collega le entità tra di loro. | idRicetta, nome, procedimento, foto, tempo di preparazione, tempo di cottura, kcal. | idRicetta |
 | Categoria | Definisce la categoria della ricetta. | idCategoria, nome. | idCategoria |
 | Recensione | Breve testo per commentare una ricetta. | idRecensione, testo | idRecensione |
 | *Preferito* | Ricetta che un utente salva in una lista di preferite. | idRicetta, email | IDRicetta↑email↑ |
@@ -78,7 +78,6 @@ Legenda: *entità debole*, identificatore esterno↑;
 - L'attributo "Nome" nell'entità "Utente", "Ricetta" e "Categoria" deve avere al massimo 500 caratteri.
 - L'attributo "Tempo Preparazione" nell'entità "Ricetta" è espresso in minuti.
 - L'attributo "Tempo Cottura" nell'entità "Ricetta" è espresso in minuti.
-- L'attributo "Tempo" nell'entità "Ricetta" è espresso in minuti.
 - L'attributo "Voto" nell'entità "testoeVoto" è espresso in interi da 1 a 5
 
 ## 3. DEFINIZIONE DELLE PROCEDURE PER LA GESTIONE DELLA BASE DATI
@@ -100,15 +99,15 @@ Legenda: *entità debole*, identificatore esterno↑;
 
 | **Operazione** | **Tipo** | **Frequenza** |
 | --- | --- | --- |
-|1. Aggiungi un nuovo utente.| I | 2/gg |
-|2. Aggiungi nuova ricetta.| I | 2/gg |
-|3. Aggiungi recensione ad una ricetta (con o senza voto).| I | 5/gg |
-|4. Selezionare tutte le ricette di un utente.| B | 5/gg |
-|5. Selezionare tutte le ricette di una categoria.| I | 5/gg |
-|6.Selezionare le ricette presenti in tutti i preferiti.| B | 1/gg |
+|1. Aggiungi un nuovo utente.| I | 60/mm |
+|2. Aggiungi nuova ricetta.| I | 60/mm |
+|3. Aggiungi recensione ad una ricetta (con o senza voto).| I | 150/mm |
+|4. Selezionare tutte le ricette di un utente.| I | 150/mm |
+|5. Selezionare tutte le ricette di una categoria.| I | 150/mm |
+|6. Selezionare le ricette presenti in tutti i preferiti.| B | 30/mm |
 |7. Rimuovere una ricetta.| I | 1/mm |
-|8. Selezionare lista ricette ordinate per tempo totale di preparazione (preparazione+cottura) crescente nella lista dei preferiti di un certo utente.| B | 2/gg |
-|9.Selezionare il numero di ricette inserite da un utente.| B | 5/gg |
+|8. Selezionare lista ricette ordinate per tempo totale di preparazione crescente nella lista dei preferiti di un certo utente.| I | 60/mm |
+|9. Selezionare il numero di ricette inserite da un utente.| I | 150/mm |
 |10. Selezionare una lista di email ordinate in ordine alfabetico corrispondenti agli utenti aventi numero di telefono con prefisso Italiano, Francese o Tedesco.| B | 1/mm |
 
 ## 4. PROGETTAZIONE LOGICA
@@ -117,40 +116,54 @@ Legenda: *entità debole*, identificatore esterno↑;
 
 Nello schema iniziale è presente l'attributo multi-valore "telefono" nell'entità "Utente". In fase di progettazione logica questo attributo va rimosso e ristrutturato, trasformandolo in un'entità e poi collegandolo all'entità alla quale apparteneva tramite una relazione. Si otterrà quindi lo schema seguente:
 
-![](RackMultipart20221026-1-i5lohl_html_cc3483eea8c4426a.png)
+![alt text](https://i.imgur.com/oMbMsJ4.png)
 
 **ANALISI DELLE RIDONDANZE**
 
-Il dato ridondante è l'attributo "Tempo" dell'entità "Ricetta", ovvero la quantità di tempo che deve trascorrere per la realizzazione della ricetta. Questo è un dato ridondante perché tramite dei calcoli è possibile risalire al valore del dato, ma è da verificare se effettivamente, conviene eliminarlo. Per verificare ciò si calcola la somma tempo di preparazione più il tempo di cottura, per le operazioni che lo coinvolgono, con e senza il dato.
+Il dato ridondante è l'attributo "#ricettePubblicate" dell'entità "Utente", ovvero la quantità ricette che un utente ha inserito nel portale. Questo è un dato ridondante perché tramite il conto delle istanze della relazione "Inserito" per un dato "Utente" è possibile risalire al valore del dato, ma è da verificare se effettivamente, conviene eliminarlo.
 
 **TAVOLA DEGLI ACCESSI**
 
-Si valutino dunque gli accessi con e senza l'attributo ridondante dell'entità "Ricetta". Ad esempio, osserviamo i dati relativi all'operazione **#2**.
+Si valutino dunque gli accessi con e senza l'attributo ridondante dell'entità "Utente". Ad esempio, osserviamo i dati relativi all'operazione **#2** e **#9**.
 
 | Calcolo con ridondanza - Operazione #2 |                         |         |      |
 |----------------------------------------|-------------------------|---------|------|
 | Tabella                                | Tipo                    | Accessi | Tipo |
-| Categoria                              | E                       | 1       | L    |
-| Utente                                 | E                       | 1       | L    |
-| Inserito                               | R                       | 1       | L    |
-| Appartiene                             | R                       | 1       | L    |
 | Ricetta                                | E                       | 1       | S    |
-| Ricetta                                | E                       | 1       | L    |
-| TOTALE                                 | (5L+2S) = 7*2/gg = 14/gg |         |      |
+| Inserito                               | R                       | 1       | S    |
+| Appartiene                             | R                       | 1       | S    |
+| Utente                                 | E                       | 1       | L    |
+| Utente                                 | E                       | 1       | S    |
+| TOTALE                                 | 4S+1L = 9L * 60/mm = 540L/mm + 1kb|         |      |
 
-| Calcolo con ridondanza - Operazione #2 |                         |         |      |
+| Calcolo senza ridondanza - Operazione #2 |                         |         |      |
 |----------------------------------------|-------------------------|---------|------|
 | Tabella                                | Tipo                    | Accessi | Tipo |
-| Categoria                              | E                       | 1       | L    |
-| Utente                                 | E                       | 1       | L    |
-| Inserito                               | R                       | 1       | L    |
-| Appartiene                             | R                       | 1       | L    |
 | Ricetta                                | E                       | 1       | S    |
-| TOTALE                                 | (4L+2S) = 6*2/gg = 12/gg|         |      |
+| Inserito                               | R                       | 1       | S    |
+| Appartiene                             | R                       | 1       | S    |
+| TOTALE                                 | 3S = 6L * 60/mm = 360L/mm|         |      |
 
-Osserviamo che, banalmente, il totale degli accessi all'operazione con ridondanza è superiore al totale degli accessi all'operazione senza ridondanza.
+| Calcolo con ridondanza - Operazione #9 |                         |         |      |
+|----------------------------------------|-------------------------|---------|------|
+| Tabella                                | Tipo                    | Accessi | Tipo |
+| Utente                                 | E                       | 1       | L    |
+| TOTALE                                 | 1L * 150/mm = 150L/mm * 100 utenti = 15000L/mm|         |      |
 
-Si ottiene un miglioramento quindi, in termini di acesso alla memoria, rimuovendo l'attributo ridondante.
+| Calcolo senza ridondanza - Operazione #9 |                         |         |      |
+|----------------------------------------|-------------------------|---------|------|
+| Tabella                                | Tipo                    | Accessi | Tipo |
+| Utente                                 | E                       | 1       | L    |
+| Inserito                               | R                       | 5       | L    |
+| TOTALE                                 | 6L * 150/mm = 900L/mm * 100 utenti = 90000L/mm|         |      |
+
+Totale accessi alle operazioni ridondanza = 15540 L/mm + 1kb;
+
+Totale accessi alle operazioni senza ridondanza = 90360 L/mm;
+
+Osserviamo che, il totale degli accessi all'operazione con ridondanza è inferiore al totale degli accessi all'operazione senza ridondanza.
+
+Si ottiene un miglioramento quindi, in termini di acesso alla memoria, mantenendo l'attributo ridondante.
 
 **ELIMINAZIONE DELLE GERARCHIE**
 
@@ -162,13 +175,13 @@ La gerarchia "Recensione" viene risolta eliminando le figlie e creando una nuova
 
 Lo schema ristrutturato sarà il seguente:
 
-![alt text](https://i.imgur.com/Kakx7Vl.png)
+![alt text](https://i.imgur.com/MesSNZP.png)
 
 **SCHEMA RELAZIONALE**
 
 È possibile procedere al mapping della base di dati come segue.
 
-- **Utente** (*email*, password, nome, cognome, telefono↑, via↑, data di nascita, foto)
+- **Utente** (*email*, password, nome, cognome, telefono↑, via↑, data di nascita, foto, numRicettePubblicate)
 - **Via** (*idVia*, nomeVia, civico↑)
 - **Civico** (*idCivico*, numero, cap↑)
 - **CAP** (*idCap*, cap)
@@ -254,6 +267,7 @@ CREATE TABLE Utente(
     	idVia SMALLINT NOT NULL AUTO_INCREMENT,
     	dataNascita DATE NOT NULL,
     	foto VARCHAR(20),
+	numRicettePubblicate INT,
     	PRIMARY KEY (email),
     	FOREIGN KEY (numTelefono) REFERENCES Telefono(numTelefono),
     	FOREIGN KEY (idVia) REFERENCES Via(idVia)
@@ -348,9 +362,9 @@ INSERT INTO Via VALUES
 
 DELETE FROM Utente;
 INSERT INTO Utente VALUES
-("m.rossi@gmail.com", "pass1234", "Mario", "Rossi", NULL, 3, "1962-12-12", "base64,iVBORw"),
-("p.verdi@gmail.com", "pass1234", "Paolo", "Verdi", NULL, 2, "1992-02-17", "base64,pRYFw"),
-("s.bianchi@gmail.com", "pass1234", "Simona", "Bianchi", NULL, 1, "1956-11-09", "base64,mTerP");
+("m.rossi@gmail.com", "pass1234", "Mario", "Rossi", NULL, 3, "1962-12-12", "base64,iVBORw", 2),
+("p.verdi@gmail.com", "pass1234", "Paolo", "Verdi", NULL, 2, "1992-02-17", "base64,pRYFw", 0),
+("s.bianchi@gmail.com", "pass1234", "Simona", "Bianchi", NULL, 1, "1956-11-09", "base64,mTerP", 1);
 
 DELETE FROM Telefono;
 INSERT INTO Telefono VALUES
@@ -408,8 +422,8 @@ INSERT INTO Scrive VALUES
 ```MySQL
 # OPERAZIONE 1
 INSERT INTO Utente (
-	email, 
-	psw, 
+    email, 
+    psw, 
     nome, 
     cognome, 
     numTelefono, 
@@ -417,7 +431,7 @@ INSERT INTO Utente (
     dataNascita, 
     foto
 ) VALUES (
-	value_email, 
+    value_email, 
     value_psw, 
     value_cognome, 
     value_numTelefono, 
@@ -428,7 +442,7 @@ INSERT INTO Utente (
 
 # OPERAZIONE 2
 INSERT INTO Ricetta (
-	idRicetta,
+    idRicetta,
     nome,
     foto,
     procedimento,
@@ -438,7 +452,7 @@ INSERT INTO Ricetta (
     email,
     idCategoria
 ) VALUES (
-	value_idRicetta,
+    value_idRicetta,
     value_nome,
     value_foto,
     value_procedimento,
@@ -451,21 +465,21 @@ INSERT INTO Ricetta (
 
 # OPERAZIONE 3
 INSERT INTO Recensione (
-	idRecensione,
+    idRecensione,
     testo,
     idTipologiaRecensione
 ) VALUES (
-	value_idRecensione,
+    value_idRecensione,
     value_testo,
     value_idTipologiaRecensione
 );
 
 INSERT INTO Scrive (
-	email,
+    email,
     idRecensione,
     idRicetta
 ) VALUES (
-	value_email,
+    value_email,
     value_idRecensione,
     value_idRicetta
 );
@@ -498,9 +512,9 @@ WHERE Preferito.email = ? AND Ricetta.email = ?
 ORDER BY SUM(Ricetta.tempoPreparazione * Ricetta.tempoCottura) ASC;
 
 #OPERAZIONE 9
-SELECT COUNT(DISTINCT idRicetta) 
-FROM Ricetta
-WHERE email LIKE value_email;
+SELECT numRicettePubblicate 
+FROM Utente
+WHERE email = value_email;
 
 #OPERAZIONE 10
 SELECT email
