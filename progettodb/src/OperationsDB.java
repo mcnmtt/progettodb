@@ -594,8 +594,8 @@ public class OperationsDB {
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
             PreparedStatement ps = con.prepareStatement("" +
-                    "SELECT COUNT(DISTINCT idRicetta)" +
-                    "FROM Ricetta" +
+                    "SELECT numRicettePubblicate" +
+                    "FROM Utente" +
                     "WHERE email LIKE ?;");
 
             ps.setString(1, email);
