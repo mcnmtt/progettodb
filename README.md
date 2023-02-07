@@ -116,7 +116,7 @@ Legenda: *entità debole*, identificatore esterno↑;
 
 Nello schema iniziale è presente l'attributo multi-valore "telefono" nell'entità "Utente". In fase di progettazione logica questo attributo va rimosso e ristrutturato, trasformandolo in un'entità e poi collegandolo all'entità alla quale apparteneva tramite una relazione. Si otterrà quindi lo schema seguente:
 
-![alt text](https://i.imgur.com/oMbMsJ4.png)
+![alt text](https://i.imgur.com/1ByiBVD.png)
 
 **ANALISI DELLE RIDONDANZE**
 
