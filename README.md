@@ -50,7 +50,7 @@ Sarà possibile aggiungere, da parte di un utente, una ricetta alla lista delle 
 
 SCHEMA EER
 
-![alt text](https://i.imgur.com/AGygaGF.png)
+![alt text](https://i.imgur.com/5ZENpjp.png)
 
 **DIZIONARIO DELLE ENTITÀ**
 
