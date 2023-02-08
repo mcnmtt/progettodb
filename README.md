@@ -306,10 +306,11 @@ SET SQL_SAFE_UPDATES = 0;
 
 DELETE FROM Categoria;
 INSERT INTO Categoria VALUES
-(1, "Pranzo"),
-(2, "Antipasto"),
-(3, "Cena"),
-(4, "Dolci");
+(1, "Stuzzichini", "Aperitivo"),
+(2, "Piatti unici", "Primo"),
+(3, "Piatti forti", "Secondo"),
+(4, "Dessert", "Dolce"),
+(5, "Bevande analcoliche", "Bevanda");
 
 DELETE FROM Cap;
 INSERT INTO Cap VALUES
