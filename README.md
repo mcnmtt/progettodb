@@ -221,6 +221,7 @@ DROP TABLE IF EXISTS Categoria;
 CREATE TABLE Categoria(
 	idCategoria SMALLINT NOT NULL AUTO_INCREMENT,
     	nome VARCHAR(20) NOT NULL,
+	tipologia VARCHAR(20) NOT NULL,
     	PRIMARY KEY (idCategoria)
     );
 
@@ -230,29 +231,12 @@ CREATE TABLE Telefono(
     	PRIMARY KEY (numTelefono)
     );
 
-DROP TABLE IF EXISTS Cap;
-CREATE TABLE Cap(
-	idCap SMALLINT NOT NULL AUTO_INCREMENT,
-    	cap INT NOT NULL,
-    	PRIMARY KEY (idCap)
-    );
-
-DROP TABLE IF EXISTS Civico;
-CREATE TABLE Civico(
-	idCivico SMALLINT NOT NULL AUTO_INCREMENT,
-    	numero INT NOT NULL,
-    	idCap SMALLINT NOT NULL,
-    	PRIMARY KEY (idCivico),
-    	FOREIGN KEY (idCap) REFERENCES Cap(idCap)
-    );
-
-DROP TABLE IF EXISTS Via;
-CREATE TABLE Via(
-	idVia SMALLINT NOT NULL AUTO_INCREMENT,
-    	nomeVia VARCHAR(20) NOT NULL,
-    	idCivico SMALLINT NOT NULL,
-    	PRIMARY KEY (idVia),
-    	FOREIGN KEY (idCivico) REFERENCES Civico(idCivico)
+DROP TABLE IF EXISTS Indirizzo;
+CREATE TABLE Indirizzo(
+	cap INT(6) NOT NULL,
+    	via MEDIUMTEXT NOT NULL,
+	civico INT(2) NOT NULL,
+    	PRIMARY KEY (cap, via, civico)
     );
 
 DROP TABLE IF EXISTS Utente;
@@ -262,13 +246,16 @@ CREATE TABLE Utente(
     	nome VARCHAR(20) NOT NULL,
     	cognome VARCHAR(20) NOT NULL,
     	numTelefono VARCHAR(16),
-    	idVia SMALLINT NOT NULL AUTO_INCREMENT,
+    	indirizzo SMALLINT NOT NULL AUTO_INCREMENT,
     	dataNascita DATE NOT NULL,
     	foto VARCHAR(20),
 	numRicettePubblicate INT,
+	cap INT(6) NOT NULL,
+    	via MEDIUMTEXT NOT NULL,
+	civico INT(2) NOT NULL,
     	PRIMARY KEY (email),
     	FOREIGN KEY (numTelefono) REFERENCES Telefono(numTelefono),
-    	FOREIGN KEY (idVia) REFERENCES Via(idVia)
+    	FOREIGN KEY (cap, via, civico) REFERENCES Indirizzo(cap, via, civico)
     );
 
 ALTER TABLE Telefono
@@ -302,20 +289,12 @@ CREATE TABLE Preferito(
         FOREIGN KEY (email) REFERENCES Utente(email)
     );
     
-DROP TABLE IF EXISTS TipologiaRecensione;
-CREATE TABLE TipologiaRecensione(
-	idTipologiaRecensione SMALLINT NOT NULL AUTO_INCREMENT,
-        tipoRecensione VARCHAR(20) NOT NULL,
-        PRIMARY KEY (idTipologiaRecensione)
-    );
-    
 DROP TABLE IF EXISTS Recensione;
 CREATE TABLE Recensione(
 	idRecensione SMALLINT NOT NULL AUTO_INCREMENT,
         testo VARCHAR(200) NOT NULL,
-        idTipologiaRecensione SMALLINT NOT NULL,
-        PRIMARY KEY (idRecensione),
-        FOREIGN KEY (idTipologiaRecensione) REFERENCES TipologiaRecensione(idTipologiaRecensione)
+        voto INT(1),
+        PRIMARY KEY (idRecensione)
     );
     
 DROP TABLE IF EXISTS Scrive;
