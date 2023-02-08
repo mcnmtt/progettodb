@@ -246,7 +246,6 @@ CREATE TABLE Utente(
     	nome VARCHAR(20) NOT NULL,
     	cognome VARCHAR(20) NOT NULL,
     	numTelefono VARCHAR(16),
-    	indirizzo SMALLINT NOT NULL AUTO_INCREMENT,
     	dataNascita DATE NOT NULL,
     	foto VARCHAR(20),
 	numRicettePubblicate INT,
@@ -307,40 +306,26 @@ SET SQL_SAFE_UPDATES = 0;
 DELETE FROM Categoria;
 INSERT INTO Categoria VALUES
 (1, "Stuzzichini", "Aperitivo"),
-(2, "Piatti unici", "Primo"),
-(3, "Piatti forti", "Secondo"),
-(4, "Dessert", "Dolce"),
-(5, "Bevande analcoliche", "Bevanda");
+(2, "Semifreddo", "Dolce"),
+(3, "Bevande analcoliche", "Bevanda");
 
-DELETE FROM Cap;
-INSERT INTO Cap VALUES
-(1, 84036),
-(2, 40200),
-(3, 17506);
-
-DELETE FROM Civico;
-INSERT INTO Civico VALUES
-(1, 20, 1),
-(2, 37, 2),
-(3, 19, 3);
-
-DELETE FROM Via;
-INSERT INTO Via VALUES
-(1, "via Roma", 1),
-(2, "via Matteotti", 2),
-(3, "via Cavour", 3);
+DELETE FROM Indirizzo;
+INSERT INTO Indirizzo VALUES
+(84036, 'via Matteotti', 5),
+(84035, 'via Sturzo', 4),
+(44121, 'via Manzoni', 3);
 
 DELETE FROM Utente;
 INSERT INTO Utente VALUES
-("m.rossi@gmail.com", "pass1234", "Mario", "Rossi", NULL, 3, "1962-12-12", "base64,iVBORw", 2),
-("p.verdi@gmail.com", "pass1234", "Paolo", "Verdi", NULL, 2, "1992-02-17", "base64,pRYFw", 0),
-("s.bianchi@gmail.com", "pass1234", "Simona", "Bianchi", NULL, 1, "1956-11-09", "base64,mTerP", 1);
+("m.rossi@gmail.com", "pass1234", "Mario", "Rossi", NULL, "1962-12-12", "base64,iVBORw", 2, 84036, "via Matteotti", 5),
+("p.verdi@gmail.com", "pass4321", "Paolo", "Verdi", NULL, "1992-02-17", "base64,pRYFw", 0, 84035, "via Sturzo", 4),
+("s.bianchi@gmail.com", "pass3412", "Simona", "Bianchi", NULL, "1956-11-09", "base64,mTerP", 1, 44121, "via Manzoni", 3);
 
 DELETE FROM Telefono;
 INSERT INTO Telefono VALUES
 ("3661959894", "m.rossi@gmail.com"),
-("3200120242","p.verdi@gmail.com"),
-("3397209757","s.bianchi@gmail.com");
+("3200120242", "p.verdi@gmail.com"),
+("3397209757", "s.bianchi@gmail.com");
 
 UPDATE Utente
 SET numTelefono = "3661959894"
@@ -356,24 +341,15 @@ WHERE email = "s.bianchi@gmail.com";
 
 DELETE FROM Ricetta;
 INSERT INTO Ricetta VALUES
-(1, "Polpettone", "base64,iVBORw", "testotesttesto", 30, 30, 1500, "s.bianchi@gmail.com", 3),
-(2, "Tenerina", "base64,mTerP", "provaprovaprova", 60, 20, 800, "m.rossi@gmail.com", 4),
-(3, "Pasta al sugo", "base64,pRYFw", "testoprovatesto", 10, 10, 800, "m.rossi@gmail.com", 1);
+(1, "Polpettone", "base64,iVBORw", "testotesttesto", 30, 30, 1500, "s.bianchi@gmail.com", 1),
+(2, "Tenerina", "base64,mTerP", "provaprovaprova", 60, 20, 800, "m.rossi@gmail.com", 3),
+(3, "Pasta al sugo", "base64,pRYFw", "testoprovatesto", 10, 10, 800, "m.rossi@gmail.com", 2);
 
 DELETE FROM Preferito;
 INSERT INTO Preferito VALUES
 (2, "m.rossi@gmail.com"),
 (1, "p.verdi@gmail.com"),
 (2, "s.bianchi@gmail.com");
-
-DELETE FROM TipologiaRecensione;
-INSERT INTO TipologiaRecensione VALUES
-(1, "NO VOTO"),
-(2, "1 STELLA"),
-(3, "2 STELLE"),
-(4, "3 STELLE"),
-(5, "4 STELLE"),
-(6, "5 STELLE");
 
 DELETE FROM Recensione;
 INSERT INTO Recensione VALUES
