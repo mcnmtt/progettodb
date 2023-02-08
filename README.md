@@ -205,8 +205,6 @@ Legenda: *identificatore*, identificatore esterno↑;
 
 ![alt text](https://i.imgur.com/MT5Vqkv.png)
 
-*È stata ristrutturata anche l'entità "indirizzo" per portarla in 2FN, questa entità non rispetta la 2FN perché ci sono delle dipendenze funzionali parziali.*
-
 ## 5. REALIZZAZIONE DATABASE CON MYSQL
 Script per la creazione del database:
 ```MySQL
