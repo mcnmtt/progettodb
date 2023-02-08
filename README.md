@@ -167,15 +167,15 @@ Si ottiene un miglioramento quindi, in termini di acesso alla memoria, mantenend
 
 **ELIMINAZIONE DELLE GERARCHIE**
 
-Nello schema inizialmente elaborato, è presente la seguente specializzazione dell'entità "Recensione":
+Nello schema inizialmente elaborato, è presente la seguente specializzazione dell'entità "Categoria":
 
-![alt text](https://i.imgur.com/YgwQXSA.png)
+![alt text](https://i.imgur.com/er5EERS.png)
 
-La gerarchia "Recensione" viene risolta eliminando le figlie e creando una nuova entità "Tipologia Recensione" con un attributo "tipoRecensione" che descrive il tipo di recensione scelta.
+La gerarchia "Categoria" viene risolta accorpando le entità figlie (specializzazioni) nell'entità padre.
 
 Lo schema ristrutturato sarà il seguente:
 
-![alt text](https://i.imgur.com/MesSNZP.png)
+![alt text]()
 
 **SCHEMA RELAZIONALE**
 
