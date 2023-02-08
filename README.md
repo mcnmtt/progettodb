@@ -59,7 +59,7 @@ SCHEMA EER
 | Utente | Utente coinvolto nella realtà d'interesse. | email, password, nome, cognome, telefono, indirizzo, data di nascita, foto, numRicettePubblicate. | email |
 | Ricetta | L'elemento al centro della realtà d'interesse che collega le entità tra di loro. | idRicetta, nome, procedimento, foto, tempo di preparazione, tempo di cottura, kcal. | idRicetta |
 | Categoria | Definisce la categoria della ricetta. | idCategoria, nome. | idCategoria |
-| Recensione | Breve testo per commentare una ricetta. | idRecensione, testo | idRecensione |
+| Recensione | Breve testo per commentare una ricetta. | idRecensione, testo, voto | idRecensione |
 | *Preferito* | Ricetta che un utente salva in una lista di preferite. | idRicetta, email | IDRicetta↑email↑ |
 
 Legenda: *entità debole*, identificatore esterno↑;
