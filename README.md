@@ -157,7 +157,7 @@ Si valutino dunque gli accessi con e senza l'attributo ridondante dell'entità "
 | Inserito                               | R                       | 5       | L    |
 | TOTALE                                 | 6L * 150/mm = 900L/mm * 100 utenti = 90000L/mm|         |      |
 
-Totale accessi alle operazioni ridondanza = 15540 L/mm + 1kb;
+Totale accessi alle operazioni con ridondanza = 15540 L/mm + 1kb;
 
 Totale accessi alle operazioni senza ridondanza = 90360 L/mm;
 
@@ -175,7 +175,7 @@ La gerarchia "Categoria" viene risolta accorpando le entità figlie (specializza
 
 Lo schema ristrutturato sarà il seguente:
 
-![alt text]()
+![alt text](https://i.imgur.com/Adt6poz.png)
 
 **SCHEMA RELAZIONALE**
 
@@ -203,7 +203,7 @@ Legenda: *identificatore*, identificatore esterno↑;
 
 **SCHEMA EER RISTRUTTURATO**
 
-![alt text](https://i.imgur.com/I8qwmK0.png)
+![alt text](https://i.imgur.com/MT5Vqkv.png)
 
 *È stata ristrutturata anche l'entità "indirizzo" per portarla in 2FN, questa entità non rispetta la 2FN perché ci sono delle dipendenze funzionali parziali.*
 
