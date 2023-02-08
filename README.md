@@ -78,7 +78,7 @@ Legenda: *entità debole*, identificatore esterno↑;
 - L'attributo "Nome" nell'entità "Utente", "Ricetta" e "Categoria" deve avere al massimo 500 caratteri.
 - L'attributo "Tempo Preparazione" nell'entità "Ricetta" è espresso in minuti.
 - L'attributo "Tempo Cottura" nell'entità "Ricetta" è espresso in minuti.
-- L'attributo "Voto" nell'entità "testoeVoto" è espresso in interi da 1 a 5
+- L'attributo "Voto" nell'entità "Recensione" è espresso in interi da 1 a 5.
 
 ## 3. DEFINIZIONE DELLE PROCEDURE PER LA GESTIONE DELLA BASE DATI
 
