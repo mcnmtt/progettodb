@@ -294,19 +294,11 @@ CREATE TABLE Recensione(
 	idRecensione SMALLINT NOT NULL AUTO_INCREMENT,
         testo VARCHAR(200) NOT NULL,
         voto INT(1),
-        PRIMARY KEY (idRecensione)
+	idRicetta SMALLINT NOT NULL,
+        PRIMARY KEY (idRecensione),
+	FOREIGN KEY (idRicetta) REFERENCES Ricetta(idRicetta)
     );
     
-DROP TABLE IF EXISTS Scrive;
-CREATE TABLE Scrive(
-	email VARCHAR(20) NOT NULL,
-        idRecensione SMALLINT NOT NULL,
-        idRicetta SMALLINT NOT NULL,
-        PRIMARY KEY (idRecensione, idRicetta),
-        FOREIGN KEY (email) REFERENCES Utente(email),
-        FOREIGN KEY (idRecensione) REFERENCES Recensione(idRecensione),
-        FOREIGN KEY (idRicetta) REFERENCES Ricetta(idRicetta)
-    );
 ```
 Script per popolare il database:
 ```MySQL
