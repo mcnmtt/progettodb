@@ -20,17 +20,17 @@ Si intende progettare una base di dati che gestisca le informazioni relative ad 
 
 Il portale ha come obiettivo la pubblicazione e l'interazione con ricette pubblicate dagli utenti, questi ultimi possono quindi pubblicare ricette tramite un form dedicato ed interagire con esse tramite pulsanti per aggiungere ad una lista di preferite e/o aggiungere recensioni.
 
-Gli utenti sono identificati unicamente da un _email_. Di un utente si vogliono conoscere anche tutte le informazioni essenziali come nome, cognome, telefono, indirizzo e data di nascita.
+Gli utenti sono identificati unicamente da un _email_. Di un utente si vogliono conoscere anche tutte le informazioni essenziali come nome, cognome, telefono eventualmente, indirizzo e data di nascita.
 
 L'email e la password sono necessarie per l'accesso al portale.
 
 Solo una volta effettuato l'accesso gli utenti avranno la possibilità di interagire a pieno col portale, altrimenti potranno solo leggere le ricette presenti.
 
-Ogni ricetta ha come identificatore univoco un _idRicetta_, inoltre servirà conoscere anche il nome, il procedimento, i tempi di preparazione, cottura e totale, le kcal ed eventualmente le foto sotto forma di testo codificato.
+Ogni ricetta ha come identificatore univoco un _idRicetta_, inoltre servirà conoscere anche il nome, il procedimento, i tempi di preparazione e cottura, le kcal ed eventualmente le foto sotto forma di testo codificato.
 
-Le ricette appartengono a più categorie, queste ultime identificate attraverso un _idCategoria_ ed un nome. Grazie alle categorie sarà possibile filtrare le ricette durante una ricerca sul portale.
+Le ricette appartengono a una o più categorie, queste ultime identificate attraverso un _idCategoria_, un nome ed una tipologia. Grazie alle categorie sarà possibile filtrare le ricette durante una ricerca sul portale.
 
-Le ricette possono avere recensioni, queste sono identificate da un _idRecensione_ e devono avere un contenuto di testo ed eventualmente una votazione.
+Le ricette possono avere recensioni, queste sono identificate da un _idRecensione_ e devono avere un contenuto di testo e una votazione.
 
 Di una recensione vogliamo sapere la ricetta associata, perché un'istanza di recensione appartiene ad una singola ricetta.
 
@@ -42,7 +42,7 @@ Sarà possibile aggiungere, da parte di un utente, una ricetta alla lista delle 
 | --- | --- |
 | Utente | Utente coinvolto nella realtà di interesse. |
 | Ricetta | L'elemento al centro della realtà d'interesse che collega le entità tra di loro. |
-| Categoria | Definisce la categoria della ricetta tramite un nome. |
+| Categoria | Definisce la categoria della ricetta tramite un nome ed una tipologia. |
 | Preferite | L'insieme delle ricette che un utente può preferire. |
 | Recensioni | L'insieme delle recensioni che una ricetta può contenere, scritte dagli utenti visitanti con un breve testo e, eventualmente, una votazione (interi da 1 a 5). |
 
@@ -68,9 +68,9 @@ Legenda: *entità debole*, identificatore esterno↑;
 
 | **Relazione** | **Descrizione** | **Entità coinvolte** | **Attributi** |
 | --- | --- | --- | --- |
-| Inserito | Un utente inserisce una ricetta. Una ricetta è inserita da uno ed un solo utente. | Utente (0,N)Ricetta (1,1) | / |
-| Scrive | Un utente scrive uno o più recensioni. Una recensione è scritta da uno ed un solo utente. | Utente (0,N)Recensione (1,1) | idRicetta |
-| Appartiene | Una ricetta appartiene a più categorie. Una categoria appartiene a più ricette. | Ricetta (N,N)Categoria (N,N) | / |
+| Inserito | Un utente inserisce una ricetta. Una ricetta è inserita da uno ed un solo utente. | Utente (0,N), Ricetta (1,1) | / |
+| Scrive | Un utente scrive uno o più recensioni. Una recensione è scritta da uno ed un solo utente. | Utente (0,N), Recensione (1,1) | idRicetta |
+| Appartiene | Una ricetta appartiene a più categorie. Una categoria appartiene a più ricette. | Ricetta (1,N), Categoria (0,N) | / |
 
 **VINCOLI NON ESPRIMIBILI**
 
