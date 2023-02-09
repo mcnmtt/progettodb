@@ -203,7 +203,7 @@ Legenda: *identificatore*, identificatore esterno↑;
 
 **SCHEMA EER RISTRUTTURATO**
 
-![alt text](https://i.imgur.com/MT5Vqkv.png)
+![alt text](https://i.imgur.com/pwdaaUx.png)
 
 ## 5. REALIZZAZIONE DATABASE CON MYSQL
 Script per la creazione del database:
