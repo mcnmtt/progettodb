@@ -364,12 +364,6 @@ INSERT INTO Recensione VALUES
 (2, "Mi piace pero...", 4),
 (3, "Che schifo!!!!", 2);
 
-DELETE FROM Scrive;
-INSERT INTO Scrive VALUES
-("s.bianchi@gmail.com", 1, 3),
-("m.rossi@gmail.com", 3, 1),
-("p.verdi@gmail.com", 2, 2);
-
 ```
 ## 6. IMPLEMENTAZIONE QUERY SQL
 ```MySQL
