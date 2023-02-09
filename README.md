@@ -179,21 +179,28 @@ Lo schema ristrutturato sarà il seguente:
 
 **SCHEMA RELAZIONALE**
 
+Legenda: **chiave primaria**, chiave esterna↑, opzionale*;
+
 È possibile procedere al mapping della base di dati come segue.
 
-- **Utente** (*email*, password, nome, cognome, telefono↑, via↑, data di nascita, foto, numRicettePubblicate)
-- **Via** (*idVia*, nomeVia, civico↑)
-- **Civico** (*idCivico*, numero, cap↑)
-- **CAP** (*idCap*, cap)
-- **Telefono** (*numTelefono*)
-- **Ricetta** (*idRicetta*, nome, foto, procedimento, tempo di cottura, tempo di preparazione, kcal, email↑, idCategoria↑)
-- **Categoria** (*idCategoria*, nome)
-- **Preferito** (*idRicetta↑*, *email↑*)
-- **Recensione** (*idRecensione*, testo, idTipologiaRecensione↑)
-- **Tipologia Recensione** (*idTipologiaRecensione*, tipoRecensione)
-- **Scrive** (email↑, *idRecensione↑*, *idRicetta↑*)
+- **Utente** (**email**, password, nome, cognome, foto, data nascita, #ricettePubblicate, telefono↑*, cap↑, via↑, civico↑)
+- **Telefono** (**numero**);
+- **Indirizzo** (**cap**, **via**, **civico**);
+- **Recensione** (**idRecensione**, testo, voto, ricetta↑, utente↑)
+- **Ricetta** (**idRicetta**, nome, procedimento, foto, kcal, tempoCottura, tempoPreparazione, categoria↑, utente↑)
+- **Categoria** (**idCategoria**, nome, tipologia)
+- **Preferito** (**ricetta↑**, **utente↑**)
 
-Legenda: *identificatore*, identificatore esterno↑;
+**CHIAVI ESTERNE:**
+
+- **Utente**(*telefono*) referenzia **Telefono**(*numero*)
+- **Utente**(*cap, via, civico*) referenzia **Indirizzo**(*cap, via, civico*)
+- **Recensione**(*ricetta*) referenzia **Ricetta**(*idRicetta*)
+- **Recensione**(*utente*) referenzia **Utente**(*email*)
+- **Ricetta**(*categoria*) referenzia **Categoria**(*idCategoria*)
+- **Ricetta**(*utente*) referenzia **Utente**(*email*)
+- **Preferito**(*ricetta*) referenzia **Ricetta**(*idRicetta*)
+- **Preferito**(*utente*) referenzia **Utente**(*email*)
 
 **NORMALIZZAZIONE**
 
@@ -203,7 +210,7 @@ Legenda: *identificatore*, identificatore esterno↑;
 
 **SCHEMA EER RISTRUTTURATO**
 
-![alt text](https://i.imgur.com/pwdaaUx.png)
+![alt text](https://i.imgur.com/GSJCX01.png)
 
 ## 5. REALIZZAZIONE DATABASE CON MYSQL
 Script per la creazione del database:
