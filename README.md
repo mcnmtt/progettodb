@@ -368,16 +368,8 @@ INSERT INTO Recensione VALUES
 ## 6. IMPLEMENTAZIONE QUERY SQL
 ```MySQL
 # OPERAZIONE 1
-INSERT INTO Utente (
-    email, 
-    psw, 
-    nome, 
-    cognome, 
-    numTelefono, 
-    idVia, 
-    dataNascita, 
-    foto
-) VALUES (
+INSERT INTO Utente (email, psw, nome, cognome, numTelefono, idVia, dataNascita, foto) 
+VALUES (
     value_email, 
     value_psw, 
     value_cognome, 
@@ -388,17 +380,8 @@ INSERT INTO Utente (
 );
 
 # OPERAZIONE 2
-INSERT INTO Ricetta (
-    idRicetta,
-    nome,
-    foto,
-    procedimento,
-    tempoCottura,
-    tempoPreparazione,
-    kcal,
-    email,
-    idCategoria
-) VALUES (
+INSERT INTO Ricetta (idRicetta, nome, foto, procedimento, tempoCottura, tempoPreparazione, kcal, email, idCategoria) 
+VALUES (
     value_idRicetta,
     value_nome,
     value_foto,
@@ -411,21 +394,15 @@ INSERT INTO Ricetta (
 );
 
 # OPERAZIONE 3
-INSERT INTO Recensione (
-    idRecensione,
-    testo,
-    idTipologiaRecensione
-) VALUES (
+INSERT INTO Recensione (idRecensione, testo, idTipologiaRecensione) 
+VALUES (
     value_idRecensione,
     value_testo,
     value_idTipologiaRecensione
 );
 
-INSERT INTO Scrive (
-    email,
-    idRecensione,
-    idRicetta
-) VALUES (
+INSERT INTO Scrive (email, idRecensione, idRicetta) 
+VALUES (
     value_email,
     value_idRecensione,
     value_idRicetta
