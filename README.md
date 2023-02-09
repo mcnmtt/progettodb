@@ -210,7 +210,7 @@ Legenda: **chiave primaria**, chiave esterna↑, opzionale*;
 
 **SCHEMA EER RISTRUTTURATO**
 
-![alt text](https://i.imgur.com/GSJCX01.png)
+![alt text](https://i.imgur.com/38Qx29H.png)
 
 ## 5. REALIZZAZIONE DATABASE CON MYSQL
 Script per la creazione del database:
