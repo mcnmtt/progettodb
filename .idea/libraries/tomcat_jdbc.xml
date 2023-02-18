@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="tomcat-jdbc">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/progettodb/lib/tomcat-jdbc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/progettodb/lib/mysql-connector-j-8.0.31.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

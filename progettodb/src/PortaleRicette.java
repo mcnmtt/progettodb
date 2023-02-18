@@ -38,18 +38,26 @@ public class PortaleRicette {
                 utente.setCognome(sc.next());
                 System.out.println("Telefono:");
                 utente.setTelefono(sc.next());
-                System.out.println("Indrizzo:");
-                utente.setVia(sc.next());
                 System.out.println("Data di nascita (aaaa-mm-gg):");
                 utente.setDataNascita(sc.next());
                 System.out.println("Foto:");
                 utente.setFoto(sc.next());
+                System.out.println("Numero ricette pubblicate:");
+                utente.setNumRicettePubblicate(sc.nextInt());
+                System.out.println("Cap:");
+                utente.setCap(sc.nextInt());
+                System.out.println("Civico:");
+                utente.setCivico(sc.nextInt());
+                System.out.println("Via:");
+                utente.setVia(sc.next());
+                utente.setVia(sc.nextLine());
+                sc.close();
 
                 service.operazioneUno(utente);
 
                 System.out.println("Operazione eseguita con successo.\n");
 
-                break;
+                break;/*
             case 2:
                 System.out.println("Hai scelto 'Aggiungi nuova ricetta.'");
                 Ricetta ricetta = new Ricetta();
@@ -165,7 +173,7 @@ public class PortaleRicette {
                 System.out.println("Operazione eseguita con successo.");
                 System.out.println(listEmail);
 
-                break;
+                break;*/
             default:
                 System.out.println("Errore. Scelta non valida!");
         }

@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class OperationsDB {
-
+/*
     public ArrayList<Categoria> doRetrieveAllCategoria() {
 
         ResultSet resultSet;
@@ -29,90 +29,11 @@ public class OperationsDB {
         }
     }
 
-    public ArrayList<Telefono> doRetrieveAllTelefono() {
+    public ArrayList<Indirizzo> doRetrieveAllVia() {
 
         ResultSet resultSet;
 
-        ArrayList<Telefono> lista = new ArrayList<>();
-
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
-
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Telefono;");
-            resultSet = ps.executeQuery();
-
-            while (resultSet.next()) {
-
-                Telefono telefono = new Telefono();
-                telefono.setNumero(resultSet.getString(1));
-                telefono.setEmail(resultSet.getString(2));
-
-                lista.add(telefono);
-            }
-            return lista;
-
-        } catch (SQLException e) {
-            throw new RuntimeException();
-        }
-    }
-
-    public ArrayList<Cap> doRetrieveAllCap() {
-
-        ResultSet resultSet;
-
-        ArrayList<Cap> lista = new ArrayList<>();
-
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
-
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Cap;");
-            resultSet = ps.executeQuery();
-
-            while (resultSet.next()) {
-
-                Cap cap = new Cap();
-                cap.setIdCap(resultSet.getInt(1));
-                cap.setCap(resultSet.getInt(2));
-
-                lista.add(cap);
-            }
-            return lista;
-
-        } catch (SQLException e) {
-            throw new RuntimeException();
-        }
-    }
-
-    public ArrayList<Civico> doRetrieveAllCivico() {
-
-        ResultSet resultSet;
-
-        ArrayList<Civico> lista = new ArrayList<>();
-
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
-
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Civico;");
-            resultSet = ps.executeQuery();
-
-            while (resultSet.next()) {
-
-                Civico civico = new Civico();
-                civico.setIdCivico(resultSet.getInt(1));
-                civico.setNumero(resultSet.getInt(2));
-                civico.setCap(resultSet.getInt(3));
-
-                lista.add(civico);
-            }
-            return lista;
-
-        } catch (SQLException e) {
-            throw new RuntimeException();
-        }
-    }
-
-    public ArrayList<Via> doRetrieveAllVia() {
-
-        ResultSet resultSet;
-
-        ArrayList<Via> lista = new ArrayList<>();
+        ArrayList<Indirizzo> lista = new ArrayList<>();
 
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
 
@@ -121,7 +42,7 @@ public class OperationsDB {
 
             while (resultSet.next()) {
 
-                Via via = new Via();
+                Indirizzo via = new Indirizzo();
                 via.setIdVia(resultSet.getInt(1));
                 via.setNome(resultSet.getString(2));
                 via.setCivico(resultSet.getInt(3));
@@ -226,32 +147,6 @@ public class OperationsDB {
         }
     }
 
-    public ArrayList<TipologiaRecensione> doRetrieveAllTipologiaRecensione() {
-
-        ResultSet resultSet;
-
-        ArrayList<TipologiaRecensione> lista = new ArrayList<>();
-
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
-
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM TipologiaRecensione;");
-            resultSet = ps.executeQuery();
-
-            while (resultSet.next()) {
-
-                TipologiaRecensione tipologiaRecensione = new TipologiaRecensione();
-                tipologiaRecensione.setIdTipologiaRecensione(resultSet.getInt(1));
-                tipologiaRecensione.setTipoRecensione(resultSet.getString(2));
-
-                lista.add(tipologiaRecensione);
-            }
-            return lista;
-
-        } catch (SQLException e) {
-            throw new RuntimeException();
-        }
-    }
-
     public ArrayList<Recensione> doRetrieveAllRecensione() {
 
         ResultSet resultSet;
@@ -279,33 +174,7 @@ public class OperationsDB {
         }
     }
 
-    public ArrayList<Scrive> doRetrieveAllScrive() {
-
-        ResultSet resultSet;
-
-        ArrayList<Scrive> lista = new ArrayList<>();
-
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
-
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Scrive;");
-            resultSet = ps.executeQuery();
-
-            while (resultSet.next()) {
-
-                Scrive scrive = new Scrive();
-                scrive.setEmail(resultSet.getString(1));
-                scrive.setIdRecensione(resultSet.getInt(2));
-                scrive.setIdRicetta(resultSet.getInt(3));
-
-                lista.add(scrive);
-            }
-            return lista;
-
-        } catch (SQLException e) {
-            throw new RuntimeException();
-        }
-    }
-
+*/
     //OPERAZIONE #1
     public void operazioneUno(Utente utente) {
 
@@ -317,19 +186,26 @@ public class OperationsDB {
                             "nome, " +
                             "cognome, " +
                             "numTelefono, " +
-                            "idVia, " +
                             "dataNascita, " +
-                            "foto" +
-                            ") VALUES(?,?,?,?,?,?,?,?)");
+                            "foto, " +
+                            "numRicettePubblicate, " +
+                            "cap, " +
+                            "via, " +
+                            "civico" +
+                            ") VALUES(?,?,?,?,?,?,?,?,?,?,?)");
 
             ps.setString(1, utente.getEmail());
             ps.setString(2, utente.getPsw());
             ps.setString(3, utente.getNome());
             ps.setString(4, utente.getCognome());
             ps.setString(5, utente.getTelefono());
-            ps.setString(6, utente.getVia());
-            ps.setString(7, utente.getDataNascita());
-            ps.setString(8, utente.getFoto());
+            ps.setString(6, utente.getDataNascita());
+            ps.setString(7, utente.getFoto());
+            ps.setInt(8, utente.getNumRicettePubblicate());
+            ps.setInt(9, utente.getCap());
+            ps.setString(10, utente.getVia());
+            ps.setInt(11, utente.getCivico());
+
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -338,7 +214,7 @@ public class OperationsDB {
             throw new RuntimeException(e);
         }
     }
-
+/*
     //OPERAZIONE #2
     public void operazioneDue(Ricetta ricetta) {
 
@@ -661,4 +537,5 @@ public class OperationsDB {
             throw new RuntimeException(e);
         }
     }
+    */
 }

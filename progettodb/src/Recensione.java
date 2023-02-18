@@ -1,6 +1,6 @@
 public class Recensione {
 
-    private int idRecensione, idTipologiaRecensione;
+    private int idRecensione, voto;
     private String testo;
 
     public int getIdRecensione() {
@@ -11,12 +11,12 @@ public class Recensione {
         this.idRecensione = idRecensione;
     }
 
-    public int getIdTipologiaRecensione() {
-        return idTipologiaRecensione;
+    public void setVoto(int voto) {
+        this.voto = voto;
     }
 
-    public void setIdTipologiaRecensione(int idTipologiaRecensione) {
-        this.idTipologiaRecensione = idTipologiaRecensione;
+    public int getVoto() {
+        return voto;
     }
 
     public String getTesto() {

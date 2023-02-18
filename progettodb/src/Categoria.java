@@ -1,7 +1,7 @@
 public class Categoria {
 
     private int idCategoria;
-    private String nome;
+    private String nome, tipologia;
 
     public int getIdCategoria() {
         return idCategoria;
@@ -17,5 +17,13 @@ public class Categoria {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setTipologia(String tipologia) {
+        this.tipologia = tipologia;
+    }
+
+    public String getTipologia() {
+        return tipologia;
     }
 }
