@@ -101,14 +101,8 @@ Legenda: *entità debole*, identificatore esterno↑;
 | --- | --- | --- |
 |1. Aggiungi un nuovo utente.| I | 60/mm |
 |2. Aggiungi nuova ricetta.| I | 60/mm |
-|3. Aggiungi recensione ad una ricetta (con o senza voto).| I | 150/mm |
-|4. Selezionare tutte le ricette di un utente.| I | 150/mm |
-|5. Selezionare tutte le ricette di una categoria.| I | 150/mm |
-|6. Selezionare le ricette presenti in tutti i preferiti.| B | 30/mm |
-|7. Rimuovere una ricetta.| I | 1/mm |
-|8. Selezionare lista ricette ordinate per tempo totale di preparazione crescente nella lista dei preferiti di un certo utente.| I | 60/mm |
-|9. Selezionare il numero di ricette inserite da un utente.| I | 150/mm |
-|10. Selezionare una lista di email ordinate in ordine alfabetico corrispondenti agli utenti aventi numero di telefono con prefisso Italiano, Francese o Tedesco.| B | 1/mm |
+|3. Rimuovere una ricetta.| I | 1/mm |
+|4. Selezionare il numero di ricette inserite da un utente.| I | 150/mm |
 
 ## 4. PROGETTAZIONE LOGICA
 
@@ -120,11 +114,11 @@ Nello schema iniziale è presente l'attributo multi-valore "telefono" nell'entit
 
 **ANALISI DELLE RIDONDANZE**
 
-Il dato ridondante è l'attributo "#ricettePubblicate" dell'entità "Utente", ovvero la quantità ricette che un utente ha inserito nel portale. Questo è un dato ridondante perché tramite il conto delle istanze della relazione "Inserito" per un dato "Utente" è possibile risalire al valore del dato, ma è da verificare se effettivamente, conviene eliminarlo.
+Il dato ridondante è l'attributo "#ricettePubblicate" dell'entità "Utente", ovvero la quantità di ricette che un utente ha inserito nel portale. Questo è un dato ridondante perché tramite il conto delle istanze della relazione "Inserito" per un dato "Utente" è possibile risalire al valore del dato, ma è da verificare se effettivamente, conviene eliminarlo.
 
 **TAVOLA DEGLI ACCESSI**
 
-Si valutino dunque gli accessi con e senza l'attributo ridondante dell'entità "Utente". Ad esempio, osserviamo i dati relativi all'operazione **#2** e **#9**.
+Si valutino dunque gli accessi con e senza l'attributo ridondante dell'entità "Utente". Ad esempio, osserviamo i dati relativi all'operazione **#2** e **#4**.
 
 | Calcolo con ridondanza - Operazione #2 |                         |         |      |
 |----------------------------------------|-------------------------|---------|------|
@@ -144,13 +138,13 @@ Si valutino dunque gli accessi con e senza l'attributo ridondante dell'entità "
 | Appartiene                             | R                       | 1       | S    |
 | TOTALE                                 | 3S = 6L * 60/mm = 360L/mm|         |      |
 
-| Calcolo con ridondanza - Operazione #9 |                         |         |      |
+| Calcolo con ridondanza - Operazione #4 |                         |         |      |
 |----------------------------------------|-------------------------|---------|------|
 | Tabella                                | Tipo                    | Accessi | Tipo |
 | Utente                                 | E                       | 1       | L    |
 | TOTALE                                 | 1L * 150/mm = 150L/mm * 100 utenti = 15000L/mm|         |      |
 
-| Calcolo senza ridondanza - Operazione #9 |                         |         |      |
+| Calcolo senza ridondanza - Operazione #4 |                         |         |      |
 |----------------------------------------|-------------------------|---------|------|
 | Tabella                                | Tipo                    | Accessi | Tipo |
 | Utente                                 | E                       | 1       | L    |
