@@ -10,6 +10,8 @@ public class PortaleRicette {
                 "\n2. Aggiungi nuova ricetta." +
                 "\n3. Rimuovere una ricetta." +
                 "\n4. Selezionare il numero di ricette inserite da un utente." +
+                "\n5. Modificare il numero di telefono di un utente." +
+                "\n6. Elencare gli utenti che hanno recensito tutte le ricette." +
                 "\n\n Seleziona la tua scelta e dai invio.");
 
         Scanner sc = new Scanner(System.in);
@@ -94,6 +96,29 @@ public class PortaleRicette {
 
                 System.out.println("Operazione eseguita con successo.");
                 System.out.println(ricette.size());
+
+                break;
+            case 5:
+                System.out.println("Hai scelto 'Modificare il numero di telefono di un utente.'");
+
+                System.out.println("Inserire email account utente:");
+                String email = sc.next();
+                System.out.println("Inserire nuovo numero di telefono:");
+                String nuovoTel = sc.next();
+
+                service.operazioneCinque(email, nuovoTel);
+
+                System.out.println("Operazione eseguita con successo.");
+
+                break;
+            case 6:
+                System.out.println("Hai scelto 'Elencare gli utenti che hanno recensito tutte le ricette.'");
+
+                ArrayList<String> utenti;
+                utenti = service.operazioneSei();
+
+                System.out.println("Operazione eseguita con successo. Ecco la lista di utenti:");
+                System.out.println(utenti);
 
                 break;
             default:

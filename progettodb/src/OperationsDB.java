@@ -132,4 +132,50 @@ public class OperationsDB {
         }
     }
 
+    //OPERAZIONE #5
+    public void operazioneCinque(String email, String nuovoTel){
+
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
+
+            PreparedStatement ps = con.prepareStatement("UPDATE utente SET numTelefono = ? WHERE email = ?");
+
+            ps.setString(1, nuovoTel);
+            ps.setString(2, email);
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("UPDATE error.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<String> operazioneSei(){
+
+        ArrayList<String> listaEmail = new ArrayList<>();
+
+        ResultSet resultSet;
+
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ricette", "root", "admin")) {
+
+            String query = "SELECT email FROM utente u WHERE NOT EXISTS "
+                    + "(SELECT * FROM ricetta r WHERE NOT EXISTS "
+                    + "(SELECT * FROM recensione rc WHERE u.email = rc.email "
+                    + "AND r.idRicetta = rc.idRicetta))";
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+
+                String email = resultSet.getString(1);
+
+                listaEmail.add(email);
+            }
+            return listaEmail;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
