@@ -305,7 +305,7 @@ INSERT INTO Indirizzo VALUES
 (84036, 'via Matteotti', 5),
 (84035, 'via Sturzo', 4),
 (44121, 'via Manzoni', 3),
-(84036, 'via Luigi Sturzo', 21);
+(84036, ' Luigi Sturzo', 21);
 
 DELETE FROM Utente;
 INSERT INTO Utente VALUES
@@ -338,16 +338,14 @@ L’applicazione si presenta con un interfaccia semplice ed intuitiva. È divisa
 
 Esempio d'esecuzione dell'operazione 1 (Aggiungi utente):
 
-![alt text](https://i.imgur.com/ZhGIGoD.gif)
+![alt text](https://i.imgur.com/d9UPIeo.gif)
 
 Tabella utente prima dell'operazione:
 
-![alt text](https://i.imgur.com/RInQEIv.png)
+![alt text](https://i.imgur.com/3wVYs2B.png)
 
 Tabella utente dopo l'operazione:
 
-![alt text](https://i.imgur.com/vNFAca5.png)
-
-La stampa avviene solo per le operazioni di tipo SELECT e può essere visualizzata nell’ambiente di sviluppo. 
+![alt text](https://i.imgur.com/1gpDCE4.png)
 
 Il programma è perfettamente funzionante ed è testabile utilizzando la repository corrente, in cui ovviamente poter reperire il codice Java per esteso.
