@@ -232,12 +232,6 @@ CREATE TABLE Categoria(
     	PRIMARY KEY (idCategoria)
     );
 
-DROP TABLE IF EXISTS Telefono;
-CREATE TABLE Telefono(
-	numTelefono VARCHAR(16) NOT NULL,
-    	PRIMARY KEY (numTelefono)
-    );
-
 DROP TABLE IF EXISTS Indirizzo;
 CREATE TABLE Indirizzo(
 	cap INT(6) NOT NULL,
@@ -260,15 +254,8 @@ CREATE TABLE Utente(
     	via CHAR(50) NOT NULL,
 	civico INT(2) NOT NULL,
     	PRIMARY KEY (email),
-    	FOREIGN KEY (numTelefono) REFERENCES Telefono(numTelefono),
     	FOREIGN KEY (cap, via, civico) REFERENCES Indirizzo(cap, via, civico)
     );
-
-ALTER TABLE Telefono
-ADD email VARCHAR(50) NOT NULL;
-
-ALTER TABLE Telefono
-ADD FOREIGN KEY (email) REFERENCES Utente(email);
 
 DROP TABLE IF EXISTS Ricetta;
 CREATE TABLE Ricetta(
@@ -320,31 +307,15 @@ DELETE FROM Indirizzo;
 INSERT INTO Indirizzo VALUES
 (84036, 'via Matteotti', 5),
 (84035, 'via Sturzo', 4),
-(44121, 'via Manzoni', 3);
+(44121, 'via Manzoni', 3),
+(84036, 'via Luigi Sturzo', 21);
 
 DELETE FROM Utente;
 INSERT INTO Utente VALUES
-("m.rossi@gmail.com", "pass1234", "Mario", "Rossi", NULL, "1962-12-12", "base64,iVBORw", 2, 84036, "via Matteotti", 5),
-("p.verdi@gmail.com", "pass4321", "Paolo", "Verdi", NULL, "1992-02-17", "base64,pRYFw", 0, 84035, "via Sturzo", 4),
-("s.bianchi@gmail.com", "pass3412", "Simona", "Bianchi", NULL, "1956-11-09", "base64,mTerP", 1, 44121, "via Manzoni", 3);
+("m.rossi@gmail.com", "pass1234", "Mario", "Rossi", 3661959895, "1962-12-12", "base64,iVBORw", 2, 84036, "via Matteotti", 5),
+("p.verdi@gmail.com", "pass4321", "Paolo", "Verdi", 3200120242, "1992-02-17", "base64,pRYFw", 0, 84035, "via Sturzo", 4),
+("s.bianchi@gmail.com", "pass3412", "Simona", "Bianchi", "3397209757", "1956-11-09", "base64,mTerP", 1, 44121, "via Manzoni", 3);
 
-DELETE FROM Telefono;
-INSERT INTO Telefono VALUES
-("3661959894", "m.rossi@gmail.com"),
-("3200120242", "p.verdi@gmail.com"),
-("3397209757", "s.bianchi@gmail.com");
-
-UPDATE Utente
-SET numTelefono = "3661959894"
-WHERE email = "m.rossi@gmail.com";
-
-UPDATE Utente
-SET numTelefono = "3200120242"
-WHERE email = "p.verdi@gmail.com";
-
-UPDATE Utente
-SET numTelefono = "3397209757"
-WHERE email = "s.bianchi@gmail.com";
 
 DELETE FROM Ricetta;
 INSERT INTO Ricetta VALUES
@@ -360,9 +331,9 @@ INSERT INTO Preferito VALUES
 
 DELETE FROM Recensione;
 INSERT INTO Recensione VALUES
-(1, "Molto buono!", 5),
-(2, "Mi piace pero...", 4),
-(3, "Che schifo!!!!", 2);
+(1, "Molto buono!", 5, 1),
+(2, "Mi piace pero...", 4, 2),
+(3, "Che schifo!!!!", 2, 3);
 
 ```
 ## 6. IMPLEMENTAZIONE QUERY SQL
