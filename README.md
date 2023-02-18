@@ -227,8 +227,8 @@ USE ricette;
 DROP TABLE IF EXISTS Categoria;
 CREATE TABLE Categoria(
 	idCategoria SMALLINT NOT NULL AUTO_INCREMENT,
-    	nome VARCHAR(20) NOT NULL,
-	tipologia VARCHAR(20) NOT NULL,
+    	nome VARCHAR(50) NOT NULL,
+	tipologia VARCHAR(50) NOT NULL,
     	PRIMARY KEY (idCategoria)
     );
 
@@ -248,13 +248,13 @@ CREATE TABLE Indirizzo(
 
 DROP TABLE IF EXISTS Utente;
 CREATE TABLE Utente(
-	email VARCHAR(20) NOT NULL,
-    	psw VARCHAR(20) NOT NULL,
-    	nome VARCHAR(20) NOT NULL,
-    	cognome VARCHAR(20) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+    	psw VARCHAR(50) NOT NULL,
+    	nome VARCHAR(50) NOT NULL,
+    	cognome VARCHAR(50) NOT NULL,
     	numTelefono VARCHAR(16),
     	dataNascita DATE NOT NULL,
-    	foto VARCHAR(20),
+    	foto VARCHAR(250),
 	numRicettePubblicate INT,
 	cap INT(6) NOT NULL,
     	via CHAR(50) NOT NULL,
@@ -265,7 +265,7 @@ CREATE TABLE Utente(
     );
 
 ALTER TABLE Telefono
-ADD email VARCHAR(20) NOT NULL;
+ADD email VARCHAR(50) NOT NULL;
 
 ALTER TABLE Telefono
 ADD FOREIGN KEY (email) REFERENCES Utente(email);
@@ -273,13 +273,13 @@ ADD FOREIGN KEY (email) REFERENCES Utente(email);
 DROP TABLE IF EXISTS Ricetta;
 CREATE TABLE Ricetta(
 	idRicetta SMALLINT NOT NULL AUTO_INCREMENT,
-    	nome VARCHAR(20) NOT NULL,
-	foto VARCHAR(20) NOT NULL,
+    	nome VARCHAR(50) NOT NULL,
+	foto VARCHAR(250) NOT NULL,
     	procedimento VARCHAR(500) NOT NULL,
     	tempoCottura SMALLINT NOT NULL,
     	tempoPreparazione SMALLINT NOT NULL,
     	kcal SMALLINT NOT NULL,
-    	email VARCHAR(20) NOT NULL,
+    	email VARCHAR(50) NOT NULL,
     	idCategoria SMALLINT NOT NULL,
     	PRIMARY KEY (idRicetta),
     	FOREIGN KEY (email) REFERENCES Utente(email),
@@ -289,7 +289,7 @@ CREATE TABLE Ricetta(
 DROP TABLE IF EXISTS Preferito;
 CREATE TABLE Preferito(
 	idRicetta SMALLINT NOT NULL AUTO_INCREMENT,
-        email VARCHAR(20) NOT NULL,
+        email VARCHAR(50) NOT NULL,
         PRIMARY KEY (idRicetta, email),
         FOREIGN KEY (idRicetta) REFERENCES Ricetta(idRicetta),
         FOREIGN KEY (email) REFERENCES Utente(email)
