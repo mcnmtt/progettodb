@@ -178,7 +178,6 @@ Legenda: **chiave primaria**, chiave esterna↑, opzionale*;
 È possibile procedere al mapping della base di dati come segue.
 
 - **Utente** (**email**, password, nome, cognome, foto, data nascita, #ricettePubblicate, telefono↑*, cap↑, via↑, civico↑)
-- **Telefono** (**numero**);
 - **Indirizzo** (**cap**, **via**, **civico**);
 - **Recensione** (**idRecensione**, testo, voto, ricetta↑, utente↑)
 - **Ricetta** (**idRicetta**, nome, procedimento, foto, kcal, tempoCottura, tempoPreparazione, categoria↑, utente↑)
