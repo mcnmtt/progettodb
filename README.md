@@ -241,7 +241,7 @@ CREATE TABLE Telefono(
 DROP TABLE IF EXISTS Indirizzo;
 CREATE TABLE Indirizzo(
 	cap INT(6) NOT NULL,
-    	via MEDIUMTEXT NOT NULL,
+    	via CHAR(50) NOT NULL,
 	civico INT(2) NOT NULL,
     	PRIMARY KEY (cap, via, civico)
     );
@@ -257,7 +257,7 @@ CREATE TABLE Utente(
     	foto VARCHAR(20),
 	numRicettePubblicate INT,
 	cap INT(6) NOT NULL,
-    	via MEDIUMTEXT NOT NULL,
+    	via CHAR(50) NOT NULL,
 	civico INT(2) NOT NULL,
     	PRIMARY KEY (email),
     	FOREIGN KEY (numTelefono) REFERENCES Telefono(numTelefono),
