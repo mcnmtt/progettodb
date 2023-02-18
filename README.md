@@ -103,6 +103,8 @@ Legenda: *entità debole*, identificatore esterno↑;
 |2. Aggiungi nuova ricetta.| I | 60/mm |
 |3. Rimuovere una ricetta.| I | 1/mm |
 |4. Selezionare il numero di ricette inserite da un utente.| I | 150/mm |
+|5. Modificare il numero di telefono di un utente.| I | 2/mm |
+|6. Elencare gli utenti che hanno recensito tutte le ricette. | I | 1/mm |
 
 ## 4. PROGETTAZIONE LOGICA
 
@@ -281,8 +283,10 @@ CREATE TABLE Recensione(
         testo VARCHAR(200) NOT NULL,
         voto INT(1),
 	idRicetta SMALLINT NOT NULL,
+    	email VARCHAR(50) NOT NULL,
         PRIMARY KEY (idRecensione),
-	FOREIGN KEY (idRicetta) REFERENCES Ricetta(idRicetta)
+	FOREIGN KEY (idRicetta) REFERENCES Ricetta(idRicetta),
+    	FOREIGN KEY (email) REFERENCES Utente(email)
     );
     
 ```
@@ -324,93 +328,12 @@ INSERT INTO Preferito VALUES
 
 DELETE FROM Recensione;
 INSERT INTO Recensione VALUES
-(1, "Molto buono!", 5, 1),
-(2, "Mi piace pero...", 4, 2),
-(3, "Che schifo!!!!", 2, 3);
+(1, "Molto buono!", 5, 1, "m.rossi@gmail.com"),
+(2, "Mi piace pero...", 4, 2, "m.rossi@gmail.com"),
+(3, "Che schifo!!!!", 2, 3, "m.rossi@gmail.com");
 
 ```
-## 6. IMPLEMENTAZIONE QUERY SQL
-```MySQL
-# OPERAZIONE 1
-INSERT INTO Utente (email, psw, nome, cognome, numTelefono, idVia, dataNascita, foto) 
-VALUES (
-    value_email, 
-    value_psw, 
-    value_cognome, 
-    value_numTelefono, 
-    value_idVia, 
-    value_dataNascita, 
-    value_foto
-);
-
-# OPERAZIONE 2
-INSERT INTO Ricetta (idRicetta, nome, foto, procedimento, tempoCottura, tempoPreparazione, kcal, email, idCategoria) 
-VALUES (
-    value_idRicetta,
-    value_nome,
-    value_foto,
-    value_procedimento,
-    value_tempoCottura,
-    value_tempoPreparazione,
-    value_kcal,
-    value_email,
-    value_idCategoria
-);
-
-# OPERAZIONE 3
-INSERT INTO Recensione (idRecensione, testo, idTipologiaRecensione) 
-VALUES (
-    value_idRecensione,
-    value_testo,
-    value_idTipologiaRecensione
-);
-
-INSERT INTO Scrive (email, idRecensione, idRicetta) 
-VALUES (
-    value_email,
-    value_idRecensione,
-    value_idRicetta
-);
-
-#OPERAZIONE 4
-SELECT * 
-FROM Ricetta
-WHERE Ricetta.email = value_email;
-
-#OPERAZIONE 5
-SELECT * 
-FROM Ricetta
-WHERE Ricetta.idCategoria = value_idCategoria;
-
-#OPERAZIONE 6
-SELECT *
-FROM Ricetta
-INNER JOIN Preferito ON Ricetta.idRicetta = Preferito.idRicetta
-GROUP BY Preferito.idRicetta
-HAVING COUNT(DISTINCT idRicetta) > 0;
-
-#OPERAZIONE 7
-DELETE FROM Ricetta
-WHERE idRicetta = value_idRicetta;
-
-#OPERAZIONE 8
-SELECT *
-FROM Ricetta
-WHERE Preferito.email = ? AND Ricetta.email = ?
-ORDER BY SUM(Ricetta.tempoPreparazione * Ricetta.tempoCottura) ASC;
-
-#OPERAZIONE 9
-SELECT numRicettePubblicate 
-FROM Utente
-WHERE email = value_email;
-
-#OPERAZIONE 10
-SELECT email
-FROM Utente
-WHERE Utente.telefono IN ("+39%","+33%","+49%")
-ORDER BY email ASC;
-```
-## 7. TEST DELL'APPLICAZIONE JAVA
+## 6. TEST DELL'APPLICAZIONE JAVA
 L’applicazione si presenta con un interfaccia semplice ed intuitiva. È divisa in due parti. Una parte dedicata al Menù dove è possibile visualizzare tutte le operazioni che si possono eseguire, ed una parte interattiva dove viene inserito il numero dell’operazione che si intende eseguire e tutte le altre eventuali operazioni necessarie al fine di completare l’operazione eseguita. 
 
 Esempio d'esecuzione dell'operazione 1 (Aggiungi utente):
