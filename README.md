@@ -283,8 +283,10 @@ CREATE TABLE Recensione(
         testo VARCHAR(200) NOT NULL,
         voto INT(1),
 	idRicetta SMALLINT NOT NULL,
+    	email VARCHAR(50) NOT NULL,
         PRIMARY KEY (idRecensione),
-	FOREIGN KEY (idRicetta) REFERENCES Ricetta(idRicetta)
+	FOREIGN KEY (idRicetta) REFERENCES Ricetta(idRicetta),
+    	FOREIGN KEY (email) REFERENCES Utente(email)
     );
     
 ```
@@ -326,9 +328,9 @@ INSERT INTO Preferito VALUES
 
 DELETE FROM Recensione;
 INSERT INTO Recensione VALUES
-(1, "Molto buono!", 5, 1),
-(2, "Mi piace pero...", 4, 2),
-(3, "Che schifo!!!!", 2, 3);
+(1, "Molto buono!", 5, 1, "m.rossi@gmail.com"),
+(2, "Mi piace pero...", 4, 2, "m.rossi@gmail.com"),
+(3, "Che schifo!!!!", 2, 3, "m.rossi@gmail.com");
 
 ```
 ## 6. IMPLEMENTAZIONE QUERY SQL
