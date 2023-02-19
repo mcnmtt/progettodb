@@ -104,7 +104,7 @@ Legenda: *entità debole*, identificatore esterno↑;
 |3. Rimuovere una ricetta.| I | 1/mm |
 |4. Selezionare il numero di ricette inserite da un utente.| I | 150/mm |
 |5. Modificare il numero di telefono di un utente.| I | 2/mm |
-|6. Elencare gli utenti che hanno recensito tutte le ricette. | I | 1/mm |
+|6. Elencare gli utenti che hanno recensito tutte le ricette. | B | 1/mm |
 
 ## 4. PROGETTAZIONE LOGICA
 
