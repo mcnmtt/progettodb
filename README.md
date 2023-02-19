@@ -197,12 +197,6 @@ Legenda: **chiave primaria**, chiave esterna↑, opzionale*;
 - **Preferito**(*ricetta*) referenzia **Ricetta**(*idRicetta*)
 - **Preferito**(*utente*) referenzia **Utente**(*email*)
 
-**NORMALIZZAZIONE**
-
-1. È in **prima forma normale** perché, lo schema EER non presenta né attributi composti, né attributi multi valore, rendendo ogni campo fondamentalmente atomico.
-2. È in **seconda forma normale** perché, oltre ad essere in prima forma normale, quando è presente una chiave primaria composta da più attributi tutte le dipendenze funzionali che la riguardano sono piene e non parziali.
-3. È in **terza forma normale** perché, oltre ad essere in seconda forma normale e in prima forma normale, in tutte le tabelle non sono presenti dipendenze transitive fra attributi non chiave e la chiave primaria.
-
 **SCHEMA EER RISTRUTTURATO**
 
 ![alt text](https://i.imgur.com/38Qx29H.png)
