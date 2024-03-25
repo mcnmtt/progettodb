@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="200" src="https://www.unisa.it/rescue/img/logo_standard.png" alt="Logo UNISA">
+    <img width="200" src="https://www.opisalerno.it/wp-content/uploads/2016/11/logo-unisa-png.png" alt="Logo UNISA">
 </p>
 <h2 align="center">
 PROGETTO BASE DI DATI
